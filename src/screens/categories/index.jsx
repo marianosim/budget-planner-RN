@@ -1,11 +1,20 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from 'react-native';
 
-import { styles } from "./styles";
+import { styles } from './styles';
+import { theme } from '../../constants';
+import Expenses from '../expenses';
 
-const Categories = () => {
+const Categories = ({ navigation }) => {
   return (
-    <View styles={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Categories</Text>
+      <View>
+        <Button
+          title="Go to Expenses"
+          onPress={() => navigation.navigate(Expenses)}
+          color={theme.colors.secondary}
+        />
+      </View>
     </View>
   );
 };

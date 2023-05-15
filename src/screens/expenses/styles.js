@@ -1,15 +1,17 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-import { theme } from "../../constants";
+import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.white,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    textAlign: "center",
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Josefin-Bold',
   },
 });

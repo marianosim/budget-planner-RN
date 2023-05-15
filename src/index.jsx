@@ -1,17 +1,17 @@
-import { useFonts } from "expo-font";
-import { ActivityIndicator, View } from "react-native";
+import { useFonts } from 'expo-font';
+import { ActivityIndicator, View } from 'react-native';
 
-import { Header } from "./components";
-import { theme } from "./constants";
-import { Home } from "./screens";
-import { styles } from "./styles";
+import { Header } from './components';
+import { theme } from './constants';
+import AppNavigator from './navigation';
+import { styles } from './styles';
 
 export default function App() {
   const [loaded] = useFonts({
-    "Josefin-Regular": require("../assets/fonts/JosefinSans-Regular.ttf"),
-    "Josefin-Medium": require("../assets/fonts/JosefinSans-Medium.ttf"),
-    "Josefin-Light": require("../assets/fonts/JosefinSans-Light.ttf"),
-    "Josefin-Bold": require("../assets/fonts/JosefinSans-Bold.ttf"),
+    'Josefin-Regular': require('../assets/fonts/JosefinSans-Regular.ttf'),
+    'Josefin-Medium': require('../assets/fonts/JosefinSans-Medium.ttf'),
+    'Josefin-Light': require('../assets/fonts/JosefinSans-Light.ttf'),
+    'Josefin-Bold': require('../assets/fonts/JosefinSans-Bold.ttf'),
   });
 
   if (!loaded) {
@@ -21,7 +21,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header />
-      <Home />
+      <AppNavigator />
     </View>
   );
 }

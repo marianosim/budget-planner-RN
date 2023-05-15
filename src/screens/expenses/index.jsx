@@ -1,10 +1,10 @@
-import { View, Text } from "react-native";
+import { View, Text } from 'react-native';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 const Expenses = () => {
   return (
-    <View styles={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Expenses</Text>
     </View>
   );
