@@ -7,13 +7,8 @@ import Expenses from '../expenses';
 const Categories = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categories</Text>
       <View>
-        <Button
-          title="Go to Expenses"
-          onPress={() => navigation.navigate(Expenses)}
-          color={theme.colors.secondary}
-        />
+        <Text style={styles.title}>Categories</Text>
       </View>
     </View>
   );

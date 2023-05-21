@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 
-import MainNavigator from './main';
+import TabsNavigator from './tabs';
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <MainNavigator />
+      <TabsNavigator />
     </NavigationContainer>
   );
 };
