@@ -1,8 +1,6 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { styles } from './styles';
-import { theme } from '../../constants';
-import Expenses from '../expenses';
 
 const Categories = ({ navigation }) => {
   return (

@@ -11,7 +11,7 @@ const ExpensesNavigator = () => {
       initialRouteName="Expenses"
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.secondary,
+          backgroundColor: theme.colors.terciary,
         },
         headerTintColor: theme.colors.text,
         headerTitleStyle: {

@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { theme } from '../../constants';
@@ -20,8 +21,8 @@ const TabsNavigator = () => {
         tabBarStyle: {
           backgroundColor: theme.colors.secondary,
         },
-        tabBarActiveTintColor: theme.colors.text,
-        tabBarInactiveTintColor: theme.colors.gray,
+        tabBarActiveTintColor: theme.colors.black,
+        tabBarInactiveTintColor: theme.colors.darkGray,
         tabBarIconStyle: {
           fontSize: 22,
         },
@@ -31,6 +32,9 @@ const TabsNavigator = () => {
         component={HomeNavigator}
         options={{
           tabBarLabel: 'Home',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -38,6 +42,9 @@ const TabsNavigator = () => {
         component={CategoriesNavigator}
         options={{
           tabBarLabel: 'Categories',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'grid' : 'grid-outline'} size={size} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -45,6 +52,9 @@ const TabsNavigator = () => {
         component={ExpensesNavigator}
         options={{
           tabBarLabel: 'Expenses',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'cash' : 'cash-outline'} size={size} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
