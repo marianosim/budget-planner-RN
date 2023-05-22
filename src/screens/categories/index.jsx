@@ -1,14 +1,24 @@
-import { View, Text } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 
 import { styles } from './styles';
+import { CategoryCard } from '../../components';
+import { CATEGORIES } from '../../constants';
 
 const Categories = ({ navigation }) => {
+  const renderItem = ({ item }) => <CategoryCard item={item} />;
+
+  const keyExtractor = (item) => item.id.toString();
+
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Categories</Text>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={CATEGORIES}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        horizontal={false}
+        numColumns={2}
+      />
+    </SafeAreaView>
   );
 };
 
