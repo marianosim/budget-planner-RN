@@ -4,15 +4,19 @@ import { styles } from './styles';
 import { ExpenseItem } from '../../components';
 import { EXPENSES } from '../../constants';
 
-const Expenses = () => {
+const ExpensesByCategory = ({ route }) => {
+  const { categoryId } = route.params;
+
+  const filteredExpenses = EXPENSES.filter((expense) => expense.category === categoryId);
+
   const renderItem = ({ item }) => <ExpenseItem item={item} />;
   const keyExtractor = (item) => item.id.toString();
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList data={EXPENSES} renderItem={renderItem} keyExtractor={keyExtractor} />
+      <FlatList data={filteredExpenses} renderItem={renderItem} keyExtractor={keyExtractor} />
     </SafeAreaView>
   );
 };
 
-export default Expenses;
+export default ExpensesByCategory;

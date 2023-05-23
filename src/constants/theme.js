@@ -7,9 +7,10 @@ export const theme = {
     white: '#ffffff',
     black: '#000000',
     grey: '#cccccc',
-    lightGray: '#F5F5F5',
+    lightGray: '#E1E8E5',
     mediumGray: '#bfc0c0',
     darkGray: '#7F7F7F',
     brightRed: '#E23428',
+    lighGreen: '#cfdbd5',
   },
 };

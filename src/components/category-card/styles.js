@@ -5,7 +5,7 @@ import { theme } from '../../constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 250,
+    height: 200,
     borderRadius: 10,
     marginHorizontal: 20,
     marginVertical: 5,

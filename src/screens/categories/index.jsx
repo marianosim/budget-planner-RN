@@ -5,7 +5,15 @@ import { CategoryCard } from '../../components';
 import { CATEGORIES } from '../../constants';
 
 const Categories = ({ navigation }) => {
-  const renderItem = ({ item }) => <CategoryCard item={item} />;
+  const onSelected = (item) => {
+    navigation.navigate('ExpensesByCategory', {
+      categoryId: item.id,
+      name: item.name,
+      color: item.color,
+    });
+  };
+
+  const renderItem = ({ item }) => <CategoryCard item={item} onSelected={onSelected} />;
 
   const keyExtractor = (item) => item.id.toString();
 
