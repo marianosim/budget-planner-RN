@@ -6,12 +6,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'Josefin-Bold',
+  cardsContainer: {
+    flex: 1,
+  },
+  inputContainer: {
+    flex: 1,
   },
 });
