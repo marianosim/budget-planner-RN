@@ -5,13 +5,16 @@ import { theme } from '../../constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 200,
+    //height: 200,
     borderRadius: 10,
     marginHorizontal: 20,
-    marginVertical: 5,
+    //marginVertical: 1,
+    justifyContent: 'space-around',
   },
   containerTouchable: {
     flex: 0.5,
+    height: 100,
+    marginVertical: 30,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
