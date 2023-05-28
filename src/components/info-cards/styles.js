@@ -4,17 +4,15 @@ import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginHorizontal: 10,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   cardContainer: {
     flex: 1,
     height: 80,
-    padding: 5,
-    margin: 10,
+    margin: 8,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.colors.terciary,
@@ -33,5 +31,8 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  cardTotal: {},
+  cardTotal: {
+    fontFamily: 'Josefin-Medium',
+    fontSize: 16,
+  },
 });

@@ -12,5 +12,12 @@ export const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
+    justifyContent: 'center',
+  },
+  expenseList: {},
+  expenseListTitle: {
+    fontFamily: 'Josefin-Regular',
+    fontSize: 16,
+    marginHorizontal: 12,
   },
 });

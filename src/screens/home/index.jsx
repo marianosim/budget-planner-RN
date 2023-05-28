@@ -1,8 +1,8 @@
 import { View, Text, FlatList } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
-import { ExpenseItem, InfoCards } from '../../components';
+import { ExpenseItem, InfoCards, Input } from '../../components';
 
 const Home = ({ navigation }) => {
   const renderItem = ({ item }) => <ExpenseItem item={item} />;
@@ -15,9 +15,10 @@ const Home = ({ navigation }) => {
         <InfoCards />
       </View>
       <View style={styles.inputContainer}>
-        <Text>Input</Text>
+        <Input />
       </View>
       <View style={styles.expenseList}>
+        <Text style={styles.expenseListTitle}>Your expenses:</Text>
         <FlatList data={expenses} renderItem={renderItem} keyExtractor={keyExtractor} />
       </View>
     </View>

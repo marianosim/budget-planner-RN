@@ -1,10 +1,8 @@
-//import { useEffect } from 'react';
 import { SafeAreaView, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { ExpenseItem } from '../../components';
-//import { EXPENSES } from '../../constants';
 
 const Expenses = () => {
   const expenses = useSelector((state) => state.expenses.data);
