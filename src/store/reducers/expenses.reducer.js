@@ -1,10 +1,12 @@
+/* eslint-disable no-case-declarations */
 import { EXPENSES } from '../../constants';
 import { expensesTypes } from '../types';
 
-const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES } = expensesTypes;
+const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES, ADD_EXPENSE, GET_EXPENSES } =
+  expensesTypes;
 
 const initialState = {
-  data: EXPENSES,
+  data: [],
   selected: null,
   filteredExpenses: [],
   totalExpenses: null,
@@ -27,6 +29,17 @@ const expensesReducer = (state = initialState, action) => {
         ...state,
         totalExpenses: state.data.reduce((acc, expense) => (acc += Number(expense.amount)), 0),
       };
+    case ADD_EXPENSE:
+      return {
+        ...state,
+        data: [...state.data, action.expense],
+      };
+    case GET_EXPENSES:
+      return {
+        ...state,
+        data: action.expenses,
+      };
+
     default:
       return state;
   }

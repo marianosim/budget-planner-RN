@@ -1,13 +1,48 @@
-import { TextInput, View, Button } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 
 import { styles } from './styles';
 import { theme } from '../../constants';
+import Label from '../label';
 
-const Input = () => {
+const Input = ({
+  editable,
+  children,
+  value,
+  style,
+  onChangeText,
+  onFocus,
+  onBlur,
+  maxLength,
+  placeholder,
+  placeholderTextColor = theme.colors.darkGray,
+  keyboardType = 'default',
+  hasError,
+  error,
+  touched,
+  ...props
+}) => {
   return (
-    <View style={styles.inputContainer}>
-      <TextInput placeholder="Add new expense here" style={styles.input} value="" />
-      <Button title="Add" color={theme.colors.secondary} onPress={() => {}} />
+    <View style={styles.container}>
+      <Label {...props}>
+        <TextInput
+          {...props}
+          editable={editable}
+          value={value}
+          style={{ ...styles.input, ...style }}
+          onChangeText={onChangeText}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          maxLength={maxLength}
+          placeholder={placeholder}
+          placeholderTextColor={placeholderTextColor}
+          keyboardType={keyboardType}
+        />
+      </Label>
+      {hasError && touched ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorMessage}>{error}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };

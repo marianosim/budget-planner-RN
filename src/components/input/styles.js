@@ -3,18 +3,29 @@ import { StyleSheet } from 'react-native';
 import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: 20,
+  container: {
+    flex: 1,
+
+    // marginVertical: 10,
+    // justifyContent: 'center',
+    // height: 100,
   },
   input: {
     fontFamily: 'Josefin-Regular',
-    fontSize: 16,
-    width: '80%',
+    fontSize: 13,
+    borderBottomColor: theme.colors.primary,
     borderBottomWidth: 1,
-    borderBottomColor: theme.colors.secondary,
-    color: theme.colors.text,
+    width: '90%',
+    paddingVertical: 5,
+  },
+  errorContainer: {
+    flex: 1,
+    paddingVertical: 5,
+  },
+  errorMessage: {
+    fontFamily: 'Josefin-Regular',
+    fontSize: 30,
+    paddingVertical: 5,
+    color: theme.colors.brightRed,
   },
 });

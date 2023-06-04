@@ -12,7 +12,7 @@ const ExpenseItem = ({ item, onSelected }) => {
     <View style={styles.container}>
       <TouchableOpacity style={styles.touchableContainer} onPress={() => onSelected(item)}>
         <View>
-          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.name}>{item.title}</Text>
         </View>
         <View>
           <Text style={styles.amount}>$ {item.amount}</Text>
