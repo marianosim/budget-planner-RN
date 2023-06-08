@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
-import { totalExpenses } from '../../store/actions';
+//import { totalExpenses } from '../../store/actions';
 
-const InfoCards = () => {
-  const dispatch = useDispatch();
-  const expenses = useSelector((state) => state.expenses.data);
-  const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
+const InfoCards = ({ expenseTotal }) => {
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     dispatch(totalExpenses(expenses.amount));
+  //   }, [])
+  // );
 
-  useEffect(() => {
-    dispatch(totalExpenses(expenses.amount));
-  }, []);
   return (
     <View style={styles.container}>
       <View style={{ ...styles.cardContainer, backgroundColor: '#9AD3FE' }}>

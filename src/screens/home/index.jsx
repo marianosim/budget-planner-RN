@@ -1,14 +1,14 @@
 /* eslint-disable no-case-declarations */
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useReducer } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, Text, FlatList, Button, ScrollView } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { ExpenseItem, InfoCards, Input } from '../../components';
 import { theme } from '../../constants';
-import { addExpense, getExpenses } from '../../store/actions';
+import { addExpense, getExpenses, selectExpense, totalExpenses } from '../../store/actions';
 import { UPDATE_FORM, onInputChange } from '../../utils/form';
 
 const initialState = {
@@ -40,20 +40,31 @@ const formReducer = (state, action) => {
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
-  const expenses = useSelector((state) => state.expenses.data);
-  const renderItem = ({ item }) => <ExpenseItem item={item} />;
-  const keyExtractor = (item) => item?.id.toString();
-
   const categories = useSelector((state) => state.categories.data);
+  const expenses = useSelector((state) => state.expenses.data);
+  const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
+  const renderItem = ({ item }) => <ExpenseItem item={item} onSelected={onSelected} />;
+  const keyExtractor = (item) => item.id.toString();
+  const onSelected = (item) => {
+    dispatch(selectExpense(item.id));
+    navigation.navigate('Detail', {
+      name: item.name,
+      color: item.color,
+    });
+  };
 
-  useFocusEffect(
-    useCallback(() => {
-      dispatch(getExpenses());
-    }, [dispatch])
-  );
-  // useEffect(() => {
-  //   dispatch(getExpenses());
-  // }, []);
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     dispatch(getExpenses());
+  //   }, [dispatch])
+  // );
+  useEffect(() => {
+    dispatch(getExpenses());
+    console.log('expenses:', expenses);
+  }, [dispatch, onAddExpense]);
+  useEffect(() => {
+    dispatch(totalExpenses(expenses));
+  }, []);
 
   const onHandleInputChange = ({ value, name }) => {
     onInputChange({ name, value, dispatch: dispatchFormState, formState });
@@ -67,12 +78,13 @@ const Home = ({ navigation }) => {
         type: formState.type.value,
       })
     );
+    console.log('expenses:', expenses);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.cardsContainer}>
-        <InfoCards />
+        <InfoCards expenseTotal={expenseTotal} />
       </View>
       <View style={styles.inputContainer}>
         <Input
@@ -110,9 +122,18 @@ const Home = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <Button title="Add" onPress={onAddExpense} />
       </View>
+
       <View style={styles.expenseList}>
-        <Text style={styles.expenseListTitle}>Your expenses:</Text>
-        <FlatList data={expenses} renderItem={renderItem} keyExtractor={keyExtractor} />
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <Text style={styles.expenseListTitle}>Your last expenses:</Text>
+            </>
+          }
+          data={expenses}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+        />
       </View>
     </View>
   );

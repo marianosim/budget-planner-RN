@@ -4,6 +4,26 @@ import { expensesTypes } from '../types';
 const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES, ADD_EXPENSE, GET_EXPENSES } =
   expensesTypes;
 
+export const getExpenses = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`);
+      const result = await response.json();
+
+      const expenses = Object.keys(result).map((key) => ({
+        ...result[key],
+        id: key,
+      }));
+      dispatch({
+        type: GET_EXPENSES,
+        expenses,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const selectExpense = (id) => ({
   type: SELECT_EXPENSE,
   expenseId: id,
@@ -14,10 +34,13 @@ export const filterExpenses = (id) => ({
   categoryId: id,
 });
 
-export const totalExpenses = (amount) => ({
-  type: TOTAL_EXPENSES,
-  expenseAmount: amount,
-});
+export const totalExpenses = (expenses) => {
+  const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+  return {
+    type: TOTAL_EXPENSES,
+    totalAmount,
+  };
+};
 
 export const addExpense = ({ title, amount, type }) => {
   return async (dispatch) => {
@@ -41,26 +64,6 @@ export const addExpense = ({ title, amount, type }) => {
       dispatch({
         type: ADD_EXPENSE,
         expense: result,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const getExpenses = () => {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`);
-      const result = await response.json();
-
-      const expenses = Object.keys(result).map((key) => ({
-        ...result[key],
-        id: key,
-      }));
-      dispatch({
-        type: GET_EXPENSES,
-        expenses,
       });
     } catch (error) {
       console.log(error);

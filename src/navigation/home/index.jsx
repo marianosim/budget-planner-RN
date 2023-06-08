@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { theme } from '../../constants';
-import { Home } from '../../screens';
+import { Detail, Home } from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +19,7 @@ const HomeNavigator = () => {
         },
       }}>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );
 };

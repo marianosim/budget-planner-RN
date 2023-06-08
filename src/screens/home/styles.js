@@ -4,25 +4,25 @@ import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: theme.colors.white,
   },
   cardsContainer: {
-    flex: 1,
-    marginBottom: 10,
+    //flex: 1,
+    marginBottom: 5,
   },
   inputContainer: {
     width: '90%',
     flexDirection: 'row',
     maxWidth: 400,
-    paddingVertical: 30,
+    //paddingVertical: 10,
     padding: 15,
     margin: 15,
-    marginVertical: 80,
-    marginBottom: 20,
+    marginVertical: 20,
+    //marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    //minHeight: 120,
+    minHeight: 80,
   },
   dropdownContainer: {
     flex: 1,
@@ -37,10 +37,10 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   buttonContainer: {
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
-    marginTop: 20,
+    //marginTop: 20,
   },
   expenseList: {},
   expenseListTitle: {
