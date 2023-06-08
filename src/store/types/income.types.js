@@ -1,0 +1,6 @@
+export const incomeTypes = {
+  GET_INCOME: 'GET_INCOME',
+  SELECT_INCOME: 'SELECT_INCOME',
+  TOTAL_INCOME: 'TOTAL_INCOME',
+  ADD_INCOME: 'ADD_INCOME',
+};
