@@ -4,40 +4,47 @@ import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    flex: 1,
     backgroundColor: theme.colors.white,
   },
   cardsContainer: {
     //flex: 1,
-    marginBottom: 5,
+    //marginBottom: 5,
   },
-  inputContainer: {
-    width: '90%',
+  addButtonsContainer: {
     flexDirection: 'row',
-    maxWidth: 400,
-    //paddingVertical: 10,
-    padding: 15,
-    margin: 15,
-    marginVertical: 20,
-    //marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 80,
   },
-  dropdownContainer: {
+  touchableContainer: {
+    marginVertical: 15,
+    paddingHorizontal: 30,
+  },
+  buttonTitleContainer: {
     flex: 1,
-    fontFamily: 'Josefin-Regular',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  dropdownInput: {
-    fontFamily: 'Josefin-Regular',
-    fontSize: 13,
-    borderBottomColor: theme.colors.primary,
-    borderBottomWidth: 1,
-    width: '90%',
-    paddingVertical: 5,
+  buttonTitle: {
+    fontFamily: 'Josefin-Bold',
+    fontSize: 16,
+    justifyContent: 'center',
+    paddingBottom: 5,
   },
+  inputContainer: {
+    width: '80%',
+    maxWidth: 400,
+    padding: 15,
+    margin: 10,
+    backgroundColor: theme.colors.white,
+    borderColor: theme.colors.primary,
+    minHeight: 300,
+  },
+
   buttonContainer: {
-    //justifyContent: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 20,
     //marginTop: 20,

@@ -9,13 +9,13 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontFamily: 'Josefin-Regular',
-    fontSize: 12,
+    fontSize: 14,
     paddingVertical: 5,
     color: theme.colors.text,
   },
   subLabel: {
     fontFamily: 'Josefin-Regular',
-    fontSize: 10,
+    fontSize: 12,
     paddingVertical: 5,
     color: theme.colors.text,
   },

@@ -42,7 +42,7 @@ export const totalExpenses = (expenses) => {
   };
 };
 
-export const addExpense = ({ title, amount, type }) => {
+export const addExpense = ({ title, amount, category, type }) => {
   return async (dispatch) => {
     try {
       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`, {
@@ -54,6 +54,7 @@ export const addExpense = ({ title, amount, type }) => {
           date: Date.now(),
           title,
           amount,
+          category,
           type,
         }),
       });
