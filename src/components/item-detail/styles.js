@@ -7,6 +7,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 14,
   },
+  content: {
+    flex: 1,
+  },
   title: {
     fontFamily: 'Josefin-Bold',
     fontSize: 18,

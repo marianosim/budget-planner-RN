@@ -1,7 +1,8 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
+import ImageSelector from '../image-selector';
 
 const ItemDetail = () => {
   const item = useSelector((state) => state.expenses.selected);
@@ -11,14 +12,17 @@ const ItemDetail = () => {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.amount}>Amount: $ {item.amount}</Text>
-        <Text style={styles.date}>Date: {formatDate(item.date)}</Text>
-        <Text style={styles.category}>Category: {item.category}</Text>
-        <Text style={styles.type}>Type: {item.type}</Text>
+      <View style={styles.content}>
+        <View>
+          <Text style={styles.title}>{item.title}</Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.amount}>Amount: $ {item.amount}</Text>
+          <Text style={styles.date}>Date: {formatDate(item.date)}</Text>
+          <Text style={styles.category}>Category: {item.category}</Text>
+          <Text style={styles.type}>Type: {item.type}</Text>
+        </View>
+        <ImageSelector onImage={() => null} />
       </View>
     </View>
   );
