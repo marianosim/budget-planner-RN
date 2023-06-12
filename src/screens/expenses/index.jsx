@@ -13,7 +13,7 @@ const Expenses = ({ navigation }) => {
   const onSelected = (item) => {
     dispatch(selectExpense(item.id));
     navigation.navigate('Detail', {
-      name: item.name,
+      expenseId: item.id,
       color: item.color,
     });
   };

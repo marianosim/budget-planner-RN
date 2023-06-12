@@ -83,6 +83,7 @@ const Home = ({ navigation }) => {
   const onAddExpense = () => {
     dispatch(
       addExpense({
+        id: new Date.now(),
         title: formState.title.value,
         amount: formState.amount.value,
         category: Number(selectedCategory),

@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
@@ -22,7 +22,11 @@ const ItemDetail = () => {
           <Text style={styles.category}>Category: {item.category}</Text>
           <Text style={styles.type}>Type: {item.type}</Text>
         </View>
-        <ImageSelector onImage={() => null} />
+        {item.image ? (
+          <Image style={styles.image} source={{ uri: item.image }} />
+        ) : (
+          <ImageSelector onImage={() => null} />
+        )}
       </View>
     </View>
   );

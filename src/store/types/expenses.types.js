@@ -4,4 +4,5 @@ export const expensesTypes = {
   TOTAL_EXPENSES: 'TOTAL_EXPENSES',
   ADD_EXPENSE: 'ADD_EXPENSE',
   GET_EXPENSES: 'GET_EXPENSES',
+  ADD_IMAGE: 'ADD_IMAGE',
 };

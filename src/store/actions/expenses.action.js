@@ -1,7 +1,7 @@
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
 import { expensesTypes } from '../types';
 
-const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES, ADD_EXPENSE, GET_EXPENSES } =
+const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES, ADD_EXPENSE, GET_EXPENSES, ADD_IMAGE } =
   expensesTypes;
 
 export const getExpenses = () => {
@@ -68,6 +68,38 @@ export const addExpense = ({ title, amount, category, type }) => {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const addExpenseImage = ({ id, title, amount, category, type, image }) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          body: JSON.stringify({
+            id,
+            title,
+            amount,
+            category,
+            type,
+            image,
+          }),
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      const result = await response.json();
+
+      dispatch({
+        type: ADD_IMAGE,
+        updatedExpense: result,
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 };
