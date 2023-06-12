@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.secondary,
+    marginBottom: 10,
   },
   content: {
     flex: 1,

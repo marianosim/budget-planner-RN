@@ -1,17 +1,12 @@
 import { requestCameraPermissionsAsync, launchCameraAsync } from 'expo-image-picker';
 import { useState } from 'react';
 import { View, Text, Button, Image, Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { theme } from '../../constants';
-import { addExpenseImage } from '../../store/actions';
 
 const ImageSelector = ({ onImage }) => {
   const [pickedUrl, setPickedUrl] = useState(null);
-  const selectedExpense = useSelector((state) => state.expenses.selected);
-  const { id, title, amount, category, type } = selectedExpense;
-  const dispatch = useDispatch();
 
   const verifyPermissions = async () => {
     const { status } = await requestCameraPermissionsAsync();
@@ -37,20 +32,6 @@ const ImageSelector = ({ onImage }) => {
     onImage(image.uri);
   };
 
-  const onHandleAddImage = () => {
-    dispatch(
-      addExpenseImage({
-        id,
-        title,
-        amount,
-        category,
-        type,
-        image: pickedUrl,
-      })
-    );
-    console.log(id, pickedUrl);
-  };
-
   return (
     <View style={styles.container}>
       <View>
@@ -64,7 +45,6 @@ const ImageSelector = ({ onImage }) => {
         )}
       </View>
       <Button title="Take photo" color={theme.colors.primary} onPress={onHandleTakeImage} />
-      <Button title="Save image" onPress={onHandleAddImage} />
     </View>
   );
 };

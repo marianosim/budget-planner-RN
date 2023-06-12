@@ -1,8 +1,7 @@
-import { View, Text, Button, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
-import ImageSelector from '../image-selector';
 
 const ItemDetail = () => {
   const item = useSelector((state) => state.expenses.selected);
@@ -22,11 +21,6 @@ const ItemDetail = () => {
           <Text style={styles.category}>Category: {item.category}</Text>
           <Text style={styles.type}>Type: {item.type}</Text>
         </View>
-        {item.image ? (
-          <Image style={styles.image} source={{ uri: item.image }} />
-        ) : (
-          <ImageSelector onImage={() => null} />
-        )}
       </View>
     </View>
   );
