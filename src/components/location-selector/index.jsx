@@ -4,6 +4,7 @@ import { View, Button, Text, Alert } from 'react-native';
 
 import { styles } from './styles';
 import { theme } from '../../constants';
+import MapPreview from '../map-preview';
 
 const LocationSelector = ({ onLocation }) => {
   const [pickedLocation, setPickedLocation] = useState(null);
@@ -32,13 +33,9 @@ const LocationSelector = ({ onLocation }) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.preview}>
-        {!pickedLocation ? (
-          <Text>No hay ubicación seleccionada</Text>
-        ) : (
-          <Text>{`latitud: ${pickedLocation.lat}, longitud: ${pickedLocation.lng}`}</Text>
-        )}
-      </View>
+      <MapPreview style={styles.preview} location={pickedLocation}>
+        <Text>No hay ubicación seleccionada</Text>
+      </MapPreview>
       <Button
         title="Obtener ubicación"
         onPress={onHandlerGetLocation}

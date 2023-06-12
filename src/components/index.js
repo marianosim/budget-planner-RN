@@ -8,3 +8,4 @@ export { default as ItemDetail } from './item-detail/index';
 export { default as AddExpenseIncomeButton } from './add-expense-income-button/index';
 export { default as ImageSelector } from './image-selector/index';
 export { default as LocationSelector } from './location-selector/index';
+export { default as MapPreview } from './map-preview/index';
