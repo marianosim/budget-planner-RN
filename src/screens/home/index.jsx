@@ -15,7 +15,7 @@ const initialState = {
   title: { value: '', error: '', touched: false, hasError: true },
   amount: { value: '', error: '', touched: false, hasError: true },
   //category: { value: '', error: '', touched: false, hasError: true },
-  type: { value: '', error: '', touched: false, hasError: true },
+  // type: { value: '', error: '', touched: false, hasError: true },
   isFormValid: false,
 };
 
@@ -71,10 +71,11 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     dispatch(getExpenses());
     console.log('expenses:', expenses);
-  }, [dispatch, onAddExpense]);
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(totalExpenses(expenses));
-  }, []);
+  }, [dispatch]);
 
   const onHandleInputChange = ({ value, name }) => {
     onInputChange({ name, value, dispatch: dispatchFormState, formState });
@@ -83,11 +84,9 @@ const Home = ({ navigation }) => {
   const onAddExpense = () => {
     dispatch(
       addExpense({
-        id: new Date.now(),
         title: formState.title.value,
         amount: formState.amount.value,
         category: Number(selectedCategory),
-        type: formState.type.value,
       })
     );
     console.log('expenses:', expenses);
@@ -157,7 +156,7 @@ const Home = ({ navigation }) => {
             </Picker>
           </View>
 
-          <Input
+          {/* <Input
             placeholder=""
             placeholderTextColor={theme.colors.darkGray}
             onChangeText={(text) => onHandleInputChange({ value: text, name: 'type' })}
@@ -166,7 +165,7 @@ const Home = ({ navigation }) => {
             error={formState.type.error}
             hasError={formState.type.hasError}
             touched={formState.type.touched}
-          />
+          /> */}
           <View style={styles.buttonContainer}>
             <Button title="Add" onPress={onAddExpense} />
             <Button title="Cancel" onPress={() => setAddingExpense(false)} />

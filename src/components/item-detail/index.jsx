@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
@@ -20,6 +20,8 @@ const ItemDetail = () => {
           <Text style={styles.date}>Date: {formatDate(item.date)}</Text>
           <Text style={styles.category}>Category: {item.category}</Text>
           <Text style={styles.type}>Type: {item.type}</Text>
+          <Image source={item.image} />
+          <Text style={styles.address}>{item.address}</Text>
         </View>
       </View>
     </View>

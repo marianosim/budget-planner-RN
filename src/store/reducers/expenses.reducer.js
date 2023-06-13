@@ -1,8 +1,14 @@
 /* eslint-disable no-case-declarations */
 import { expensesTypes } from '../types';
 
-const { SELECT_EXPENSE, FILTER_EXPENSES, TOTAL_EXPENSES, ADD_EXPENSE, GET_EXPENSES, ADD_IMAGE } =
-  expensesTypes;
+const {
+  SELECT_EXPENSE,
+  FILTER_EXPENSES,
+  TOTAL_EXPENSES,
+  ADD_EXPENSE,
+  GET_EXPENSES,
+  ADD_IMAGE_LOCATION,
+} = expensesTypes;
 
 const initialState = {
   data: [],
@@ -38,11 +44,11 @@ const expensesReducer = (state = initialState, action) => {
         ...state,
         data: [...state.data, action.expense],
       };
-    case ADD_IMAGE:
+    case ADD_IMAGE_LOCATION:
       // const expenseToUpdate = state.data.find((expense) => expense.id === action.updatedExpense.id);
       return {
         ...state,
-        data: [...state.data, action.updatedExpense],
+        data: [...state.data, ...action.updatedExpense],
       };
 
     default:

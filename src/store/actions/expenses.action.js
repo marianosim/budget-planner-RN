@@ -1,4 +1,5 @@
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
+import { URL_GEOCODING } from '../../utils/maps';
 import { expensesTypes } from '../types';
 
 const {
@@ -18,7 +19,7 @@ export const getExpenses = () => {
 
       const expenses = Object.keys(result).map((key) => ({
         ...result[key],
-        id: key,
+        id: key.toString(),
       }));
       dispatch({
         type: GET_EXPENSES,
@@ -61,7 +62,10 @@ export const addExpense = ({ title, amount, category, type }) => {
           title,
           amount,
           category,
-          type,
+          type: 'expense',
+          image: '',
+          coord: '',
+          address: '',
         }),
       });
       if (!response.ok) {
@@ -78,21 +82,42 @@ export const addExpense = ({ title, amount, category, type }) => {
   };
 };
 
-export const addExpenseImageLocation = ({ id, title, amount, category, type, image }) => {
+export const addExpenseImageLocation = ({
+  id,
+  title,
+  amount,
+  category,
+  type,
+  date,
+  image,
+  coords,
+}) => {
   return async (dispatch) => {
     try {
+      const geocodingResponse = await fetch(URL_GEOCODING(coords.lat, coords.lng));
+      if (!geocodingResponse.ok) {
+        throw new Error('Problem with coords!');
+      }
+      const geocodingData = await geocodingResponse.json();
+      if (!geocodingData.results) {
+        throw new Error("Address couldn't be found!");
+      }
+      const newAddress = geocodingData.results[0].formatted_address;
       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          body: JSON.stringify({
-            title,
-            amount,
-            category,
-            type,
-            image,
-          }),
         },
+        body: JSON.stringify({
+          title,
+          amount,
+          category,
+          type,
+          date,
+          image,
+          address: newAddress,
+          coords,
+        }),
       });
       if (!response.ok) {
         throw new Error('Something went wrong!');

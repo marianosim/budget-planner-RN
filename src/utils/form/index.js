@@ -26,18 +26,6 @@ const validateInput = ({ name, value }) => {
         error = '';
       }
       break;
-    case 'type':
-      if (value.trim() === '') {
-        hasError = true;
-        error = 'Required';
-      } else if (value.trim() !== 'income' || value.trim() !== 'expense') {
-        hasError = true;
-        error = 'income or expense?';
-      } else {
-        hasError = false;
-        error = '';
-      }
-      break;
     default:
       break;
   }

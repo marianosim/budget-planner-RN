@@ -8,42 +8,44 @@ import { addExpenseImageLocation } from '../../store/actions';
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const [image, setImage] = useState('');
-  const [location, setLocation] = useState(null);
+  const [newImage, setNewImage] = useState('');
+  const [newCoords, setNewCoords] = useState(null);
   const item = useSelector((state) => state.expenses.selected);
-  const { id, title, amount, category, type } = item;
+  const { id, title, amount, category, type, date, image } = item;
 
   const onImage = (imageUri) => {
-    setImage(imageUri);
+    setNewImage(imageUri);
+    console.warn('image:', imageUri);
   };
 
   const onLocation = (location) => {
-    setLocation(location);
+    setNewCoords(location);
+    console.warn('coords: ', location);
   };
 
-  const onHandleAddImage = () => {
+  const onHandleAddImageLocation = () => {
     dispatch(
       addExpenseImageLocation({
         id,
+        date,
         title,
         amount,
         category,
         type,
-        image,
+        image: newImage,
+        coords: newCoords,
       })
     );
+    console.log(item);
   };
 
   return (
     <ScrollView style={styles.container}>
       <ItemDetail />
-      {item.image ? (
-        <Image style={styles.image} source={{ uri: item.image }} />
-      ) : (
-        <ImageSelector onImage={onImage} />
-      )}
+
+      <ImageSelector onImage={onImage} />
       <LocationSelector onLocation={onLocation} />
-      <Button title="Save Changes" onPress={onHandleAddImage} />
+      <Button title="Save Changes" onPress={onHandleAddImageLocation} />
     </ScrollView>
   );
 };
