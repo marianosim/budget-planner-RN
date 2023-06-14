@@ -21,7 +21,7 @@ const ItemDetail = () => {
           <Text style={styles.category}>Category: {item.category}</Text>
           <Text style={styles.type}>Type: {item.type}</Text>
           <Image source={item.image} />
-          <Text style={styles.address}>{item.address}</Text>
+          <Text style={styles.address}>Address: {item.address}</Text>
         </View>
       </View>
     </View>

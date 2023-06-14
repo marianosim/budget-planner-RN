@@ -41,7 +41,7 @@ const LocationSelector = ({ onLocation }) => {
         onPress={() => onHandlerGetLocation()}
         color={theme.colors.primary}
       />
-      <Button title="Elegir del mapa" onPress={() => null} color={theme.colors.primary} />
+      <Button title="Select from map" onPress={() => null} color={theme.colors.primary} />
     </View>
   );
 };

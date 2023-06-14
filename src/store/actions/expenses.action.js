@@ -1,4 +1,5 @@
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
+import { insertExpense, selectExpensesFromDB, updateExpense } from '../../db';
 import { URL_GEOCODING } from '../../utils/maps';
 import { expensesTypes } from '../types';
 
@@ -11,22 +12,40 @@ const {
   ADD_IMAGE_LOCATION,
 } = expensesTypes;
 
-export const getExpenses = () => {
+// export const getExpenses = () => {
+//   return async (dispatch) => {
+//     try {
+//       const dbResult = selectExpensesFromDB();
+//       return dbResult.rows._array;
+//       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`);
+//       const result = await response.json();
+
+//       const expenses = Object.keys(result).map((key) => ({
+//         ...result[key],
+//         id: key.toString(),
+//       }));
+//       dispatch({
+//         type: GET_EXPENSES,
+//         expenses,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
+
+export const getExpensesFromDataBase = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`);
-      const result = await response.json();
-
-      const expenses = Object.keys(result).map((key) => ({
-        ...result[key],
-        id: key.toString(),
-      }));
+      const dbResult = await selectExpensesFromDB();
+      const expenses = dbResult?.rows?._array;
+      console.log(expenses);
       dispatch({
         type: GET_EXPENSES,
         expenses,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };
@@ -49,16 +68,34 @@ export const totalExpenses = (expenses) => {
   };
 };
 
-export const addExpense = ({ title, amount, category, type }) => {
+export const addExpense = ({
+  title,
+  amount,
+  category,
+  type = 'expense',
+  image = '',
+  address = '',
+  coords = '',
+  date = Date.now(),
+}) => {
   return async (dispatch) => {
     try {
+      const dbResult = await insertExpense(
+        title,
+        amount,
+        category,
+        type,
+        image,
+        address,
+        coords,
+        date
+      );
       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          date: Date.now(),
           title,
           amount,
           category,
@@ -66,12 +103,15 @@ export const addExpense = ({ title, amount, category, type }) => {
           image: '',
           coord: '',
           address: '',
+          date: Date.now(),
         }),
       });
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
       const result = await response.json();
+      // const { title, amount, category, type, image, address, coords, date } = result;
+
       dispatch({
         type: ADD_EXPENSE,
         expense: result,
@@ -90,6 +130,7 @@ export const addExpenseImageLocation = ({
   type,
   date,
   image,
+  address,
   coords,
 }) => {
   return async (dispatch) => {
@@ -103,7 +144,10 @@ export const addExpenseImageLocation = ({
         throw new Error("Address couldn't be found!");
       }
       const newAddress = geocodingData.results[0].formatted_address;
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}`, {
+
+      const dbResult = await updateExpense(id, image, (address = newAddress), coords);
+
+      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}.json`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

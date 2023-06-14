@@ -11,7 +11,9 @@ const Detail = () => {
   const [newImage, setNewImage] = useState('');
   const [newCoords, setNewCoords] = useState(null);
   const item = useSelector((state) => state.expenses.selected);
-  const { id, title, amount, category, type, date, image } = item;
+  const { id, title, amount, category, type, date, image, address, coords } = item;
+
+  const enableButton = image && coords;
 
   const onImage = (imageUri) => {
     setNewImage(imageUri);
@@ -42,10 +44,15 @@ const Detail = () => {
   return (
     <ScrollView style={styles.container}>
       <ItemDetail />
-
-      <ImageSelector onImage={onImage} />
-      <LocationSelector onLocation={onLocation} />
-      <Button title="Save Changes" onPress={onHandleAddImageLocation} />
+      {item.image ? (
+        <Image style={styles.image} source={{ uri: item.image }} />
+      ) : (
+        <ImageSelector onImage={onImage} />
+      )}
+      {item.address === '' ? <LocationSelector onLocation={onLocation} /> : null}
+      {!image && !address ? (
+        <Button disabled={!enableButton} title="Save Changes" onPress={onHandleAddImageLocation} />
+      ) : null}
     </ScrollView>
   );
 };

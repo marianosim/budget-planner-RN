@@ -4,9 +4,19 @@ import { Provider } from 'react-redux';
 
 import { Header } from './components';
 import { theme } from './constants';
+import { init } from './db';
 import AppNavigator from './navigation';
 import store from './store/index';
 import { styles } from './styles';
+
+init()
+  .then(() => {
+    console.log('Initialized database');
+  })
+  .catch((err) => {
+    console.log('Initializing db failed');
+    console.log(err);
+  });
 
 export default function App() {
   const [loaded] = useFonts({

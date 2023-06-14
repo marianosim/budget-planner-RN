@@ -44,4 +44,9 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 8,
   },
+  address: {
+    fontSize: 14,
+    color: theme.colors.text,
+    fontFamily: 'Josefin-Bold',
+  },
 });

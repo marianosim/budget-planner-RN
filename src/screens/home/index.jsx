@@ -8,7 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './styles';
 import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input } from '../../components';
 import { theme } from '../../constants';
-import { addExpense, getExpenses, selectExpense, totalExpenses } from '../../store/actions';
+import {
+  addExpense,
+  getExpenses,
+  getExpensesFromDataBase,
+  selectExpense,
+  totalExpenses,
+} from '../../store/actions';
 import { UPDATE_FORM, onInputChange } from '../../utils/form';
 
 const initialState = {
@@ -69,7 +75,7 @@ const Home = ({ navigation }) => {
   //   }, [dispatch])
   // );
   useEffect(() => {
-    dispatch(getExpenses());
+    dispatch(getExpensesFromDataBase());
     console.log('expenses:', expenses);
   }, [dispatch]);
 

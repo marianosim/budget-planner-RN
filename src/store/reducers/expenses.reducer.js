@@ -48,7 +48,7 @@ const expensesReducer = (state = initialState, action) => {
       // const expenseToUpdate = state.data.find((expense) => expense.id === action.updatedExpense.id);
       return {
         ...state,
-        data: [...state.data, ...action.updatedExpense],
+        data: [...state.data, action.updatedExpense],
       };
 
     default:
