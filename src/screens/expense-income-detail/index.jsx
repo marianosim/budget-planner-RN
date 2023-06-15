@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { ImageSelector, ItemDetail, LocationSelector } from '../../components';
+import { theme } from '../../constants';
 import { addExpenseImageLocation } from '../../store/actions';
 
 const Detail = () => {
@@ -13,16 +14,14 @@ const Detail = () => {
   const item = useSelector((state) => state.expenses.selected);
   const { id, title, amount, category, type, date, image, address, coords } = item;
 
-  const enableButton = image && coords;
+  const enableButton = newImage && newCoords;
 
   const onImage = (imageUri) => {
     setNewImage(imageUri);
-    console.warn('image:', imageUri);
   };
 
   const onLocation = (location) => {
     setNewCoords(location);
-    console.warn('coords: ', location);
   };
 
   const onHandleAddImageLocation = () => {
@@ -38,7 +37,6 @@ const Detail = () => {
         coords: newCoords,
       })
     );
-    console.log(item);
   };
 
   return (
@@ -50,9 +48,13 @@ const Detail = () => {
         <ImageSelector onImage={onImage} />
       )}
       {item.address === '' ? <LocationSelector onLocation={onLocation} /> : null}
-      {!image && !address ? (
-        <Button disabled={!enableButton} title="Save Changes" onPress={onHandleAddImageLocation} />
-      ) : null}
+
+      <Button
+        disabled={!enableButton}
+        title="Save Changes"
+        onPress={onHandleAddImageLocation}
+        color={theme.colors.incomeGreen}
+      />
     </ScrollView>
   );
 };

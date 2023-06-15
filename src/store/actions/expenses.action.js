@@ -39,7 +39,6 @@ export const getExpensesFromDataBase = () => {
     try {
       const dbResult = await selectExpensesFromDB();
       const expenses = dbResult?.rows?._array;
-      console.log(expenses);
       dispatch({
         type: GET_EXPENSES,
         expenses,

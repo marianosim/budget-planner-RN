@@ -76,7 +76,6 @@ const Home = ({ navigation }) => {
   // );
   useEffect(() => {
     dispatch(getExpensesFromDataBase());
-    console.log('expenses:', expenses);
   }, [dispatch]);
 
   useEffect(() => {
@@ -95,7 +94,6 @@ const Home = ({ navigation }) => {
         category: Number(selectedCategory),
       })
     );
-    console.log('expenses:', expenses);
   };
 
   return (

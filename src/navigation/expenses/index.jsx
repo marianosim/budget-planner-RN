@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { theme } from '../../constants';
-import { Detail, Expenses } from '../../screens';
+import { Detail, Expenses, Maps } from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +20,7 @@ const ExpensesNavigator = () => {
       }}>
       <Stack.Screen name="Expenses" component={Expenses} />
       <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="Maps" component={Maps} options={{ title: 'Map' }} />
     </Stack.Navigator>
   );
 };
