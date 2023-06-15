@@ -12,5 +12,12 @@ export const styles = StyleSheet.create({
     height: 200,
     borderRadius: 20,
     backgroundColor: theme.colors.primary,
+    marginBottom: 20,
+  },
+  map: {
+    height: 220,
+  },
+  saveChangesButton: {
+    marginVertical: 20,
   },
 });
