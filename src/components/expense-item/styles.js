@@ -34,8 +34,15 @@ export const styles = StyleSheet.create({
   amount: {
     fontFamily: 'Josefin-Bold',
     fontSize: 17,
+    color: theme.colors.white,
   },
   date: {
     fontFamily: 'Josefin-Regular',
+  },
+  amountBadge: {
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 4,
   },
 });

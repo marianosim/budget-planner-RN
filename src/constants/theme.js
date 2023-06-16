@@ -12,6 +12,7 @@ export const theme = {
     darkGray: '#7F7F7F',
     brightRed: '#E23428',
     lighGreen: '#cfdbd5',
-    incomeGreen: '#295145',
+    incomeGreen: '#92C8B8',
+    expenseRed: '#E87379',
   },
 };

@@ -13,12 +13,17 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   title: {
     fontFamily: 'Josefin-Bold',
     fontSize: 18,
     paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.secondary,
+    marginRight: 10,
   },
   infoContainer: {
     marginVertical: 20,
