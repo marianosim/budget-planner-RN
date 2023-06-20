@@ -4,8 +4,7 @@ import { theme } from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: 100,
+    height: 90,
     marginHorizontal: 10,
     borderRadius: 5,
     paddingVertical: 10,
@@ -31,6 +30,9 @@ export const styles = StyleSheet.create({
     fontFamily: 'Josefin-Medium',
     fontSize: 17,
   },
+  infoContainer: {
+    flexDirection: 'row',
+  },
   amount: {
     fontFamily: 'Josefin-Bold',
     fontSize: 17,
@@ -44,5 +46,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 4,
+  },
+  deleteButton: {
+    paddingLeft: 14,
+    justifyContent: 'center',
   },
 });

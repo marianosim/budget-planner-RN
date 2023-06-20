@@ -4,14 +4,21 @@ import { View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
+//import { totalIncome } from '../../store/actions';
 //import { totalExpenses } from '../../store/actions';
 
-const InfoCards = ({ expenseTotal }) => {
+const InfoCards = ({ expenseTotal, incomesTotal }) => {
+  // const dispatch = useDispatch();
+  // const incomes = useSelector((state) => state?.income?.data);
+  // const incomesTotal = useSelector((state) => state?.income?.totalIncome);
   // useFocusEffect(
   //   useCallback(() => {
   //     dispatch(totalExpenses(expenses.amount));
   //   }, [])
   // );
+  // useEffect(() => {
+  //   dispatch(totalIncome(incomes));
+  // }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -25,7 +32,7 @@ const InfoCards = ({ expenseTotal }) => {
       </View>
       <View style={{ ...styles.cardContainer, backgroundColor: '#C5E8E6' }}>
         <Text style={styles.cardTitle}>Income:</Text>
-        <Text style={styles.cardTotal}>$3000</Text>
+        <Text style={styles.cardTotal}>${incomesTotal}</Text>
       </View>
     </View>
   );

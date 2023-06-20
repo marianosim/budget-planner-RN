@@ -13,7 +13,22 @@ const incomeReducer = (state = initialState, action) => {
     case GET_INCOME:
       return {
         ...state,
-        data: action.income,
+        data: action.incomes,
+      };
+    case SELECT_INCOME:
+      return {
+        ...state,
+        selected: state.data.find((income) => income.id === action.incomeId),
+      };
+    case ADD_INCOME:
+      return {
+        ...state,
+        data: [...state.data, action.income],
+      };
+    case TOTAL_INCOME:
+      return {
+        ...state,
+        totalIncome: action.totalIncomeAmount,
       };
     default:
       return state;

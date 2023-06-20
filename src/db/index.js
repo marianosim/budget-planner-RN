@@ -77,3 +77,22 @@ export const updateExpense = (id, image, address, coords) => {
   });
   return promise;
 };
+
+export const deleteExpenseFromDB = (id) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'DELETE from expenses WHERE id = ?',
+        [id],
+        (_, result) => {
+          resolve(result);
+          console.log('expense deleted!');
+        },
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+  return promise;
+};

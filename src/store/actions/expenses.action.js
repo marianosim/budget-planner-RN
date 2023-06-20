@@ -1,3 +1,4 @@
+import { totalIncome } from './income.action';
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
 import { insertExpense, selectExpensesFromDB, updateExpense } from '../../db';
 import { URL_GEOCODING } from '../../utils/maps';
@@ -59,14 +60,6 @@ export const filterExpenses = (id) => ({
   categoryId: id,
 });
 
-export const totalExpenses = (expenses) => {
-  const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
-  return {
-    type: TOTAL_EXPENSES,
-    totalAmount,
-  };
-};
-
 export const addExpense = ({
   title,
   amount,
@@ -77,6 +70,7 @@ export const addExpense = ({
   coords = '',
   date = Date.now(),
 }) => {
+  // const expenseData = { title, amount, category, type, image, address, coords, date };
   return async (dispatch) => {
     try {
       const dbResult = await insertExpense(
@@ -89,6 +83,7 @@ export const addExpense = ({
         coords,
         date
       );
+
       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`, {
         method: 'POST',
         headers: {
@@ -104,20 +99,31 @@ export const addExpense = ({
           address: '',
           date: Date.now(),
         }),
+        // body: JSON.stringify(expenseData),
       });
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
       const result = await response.json();
-      // const { title, amount, category, type, image, address, coords, date } = result;
+
+      // const expenseId = result.id;
 
       dispatch({
         type: ADD_EXPENSE,
+        // expense: { id: expenseId, ...expenseData },
         expense: result,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const totalExpenses = (expenses) => {
+  const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+  return {
+    type: TOTAL_EXPENSES,
+    totalAmount,
   };
 };
 

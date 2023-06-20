@@ -2,7 +2,7 @@
 import { Picker } from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
-import { View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
@@ -10,10 +10,14 @@ import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input } from '../../com
 import { theme } from '../../constants';
 import {
   addExpense,
+  addIncome,
   getExpenses,
   getExpensesFromDataBase,
+  getIncomes,
   selectExpense,
+  selectincome,
   totalExpenses,
+  totalIncome,
 } from '../../store/actions';
 import { UPDATE_FORM, onInputChange } from '../../utils/form';
 
@@ -52,15 +56,26 @@ const Home = ({ navigation }) => {
   const categories = useSelector((state) => state.categories.data);
   const pickerRef = useRef();
   const expenses = useSelector((state) => state.expenses.data);
+  const incomes = useSelector((state) => state.income.data);
+  const activities = expenses?.concat(incomes);
   const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
+  const incomesTotal = useSelector((state) => state.income.totalIncome);
   const renderItem = ({ item }) => <ExpenseItem item={item} onSelected={onSelected} />;
-  const keyExtractor = (item) => item.id.toString();
+  const keyExtractor = (item) => item?.id?.toString();
   const onSelected = (item) => {
-    dispatch(selectExpense(item.id));
-    navigation.navigate('Detail', {
-      name: item.name,
-      color: item.color,
-    });
+    if (item.type === 'expense') {
+      dispatch(selectExpense(item.id));
+      navigation.navigate('Expense Detail', {
+        name: item.name,
+        color: item.color,
+      });
+    } else if (item.type === 'income') {
+      dispatch(selectincome(item.id));
+      navigation.navigate('Income Detail', {
+        name: item.name,
+        color: item.color,
+      });
+    }
   };
   const openPicker = () => {
     pickerRef.current.focus();
@@ -71,16 +86,23 @@ const Home = ({ navigation }) => {
 
   // useFocusEffect(
   //   useCallback(() => {
-  //     dispatch(getExpenses());
+  //     dispatch(getExpensesFromDataBase());
   //   }, [dispatch])
   // );
   useEffect(() => {
     dispatch(getExpensesFromDataBase());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getIncomes());
+    dispatch(totalIncome(incomes));
     dispatch(totalExpenses(expenses));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(totalIncome(incomes));
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(totalExpenses(expenses));
+  // }, [dispatch]);
 
   const onHandleInputChange = ({ value, name }) => {
     onInputChange({ name, value, dispatch: dispatchFormState, formState });
@@ -94,12 +116,25 @@ const Home = ({ navigation }) => {
         category: Number(selectedCategory),
       })
     );
+    setAddingExpense(false);
+    navigation.navigate('Expenses');
+  };
+
+  const onAddIncome = () => {
+    dispatch(
+      addIncome({
+        title: formState.title.value,
+        amount: formState.amount.value,
+      })
+    );
+    setAddingIncome(false);
+    navigation.navigate('Expenses');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.cardsContainer}>
-        <InfoCards expenseTotal={expenseTotal} />
+        <InfoCards expenseTotal={expenseTotal} incomesTotal={incomesTotal} />
       </View>
       <View style={styles.addButtonsContainer}>
         <TouchableOpacity onPress={() => setAddingExpense(true)} style={styles.touchableContainer}>
@@ -145,12 +180,15 @@ const Home = ({ navigation }) => {
             error={formState.amount.error}
             hasError={formState.amount.hasError}
             touched={formState.amount.touched}
+            keyboardType="numeric"
           />
           <View>
             <Picker
               ref={pickerRef}
               selectedValue={selectedCategory}
-              onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}>
+              onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}
+              showSearch>
+              <Picker.Item label="Select Category" value="0" disabled />
               <Picker.Item label="Supermarket" value="1" />
               <Picker.Item label="Bar & Restaurants" value="2" />
               <Picker.Item label="Transport" value="3" />
@@ -159,17 +197,6 @@ const Home = ({ navigation }) => {
               <Picker.Item label="Miscellaneous" value="6" />
             </Picker>
           </View>
-
-          {/* <Input
-            placeholder=""
-            placeholderTextColor={theme.colors.darkGray}
-            onChangeText={(text) => onHandleInputChange({ value: text, name: 'type' })}
-            value={formState.type.value}
-            label="Type"
-            error={formState.type.error}
-            hasError={formState.type.hasError}
-            touched={formState.type.touched}
-          /> */}
           <View style={styles.buttonContainer}>
             <Button title="Add" onPress={onAddExpense} />
             <Button title="Cancel" onPress={() => setAddingExpense(false)} />
@@ -180,7 +207,7 @@ const Home = ({ navigation }) => {
       {addingIncome ? (
         <View style={styles.inputContainer}>
           <Input
-            placeholder="Add your expense"
+            placeholder="Add your income"
             placeholderTextColor={theme.colors.darkGray}
             onChangeText={(text) => onHandleInputChange({ value: text, name: 'title' })}
             value={formState.title.value}
@@ -190,7 +217,7 @@ const Home = ({ navigation }) => {
             touched={formState.title.touched}
           />
           <Input
-            placeholder=""
+            placeholder="Add your amount in numbers"
             placeholderTextColor={theme.colors.darkGray}
             onChangeText={(text) => onHandleInputChange({ value: text, name: 'amount' })}
             value={formState.amount.value}
@@ -198,9 +225,10 @@ const Home = ({ navigation }) => {
             error={formState.amount.error}
             hasError={formState.amount.hasError}
             touched={formState.amount.touched}
+            keyboardType="numeric"
           />
           <View style={styles.buttonContainer}>
-            <Button title="Add" onPress={() => null} />
+            <Button title="Add" onPress={onAddIncome} />
             <Button title="Cancel" onPress={() => setAddingIncome(false)} />
           </View>
         </View>
@@ -213,7 +241,7 @@ const Home = ({ navigation }) => {
               <Text style={styles.expenseListTitle}>Your last expenses:</Text>
             </>
           }
-          data={expenses}
+          data={activities?.sort((a, b) => b.date - a.date)}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
         />

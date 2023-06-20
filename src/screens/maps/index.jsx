@@ -24,7 +24,7 @@ const Maps = ({ navigation, route }) => {
   };
 
   const onHandlerSaveLocation = () => {
-    if (selectedLocation) navigation.navigate('Detail', { mapLocation: selectedLocation });
+    if (selectedLocation) navigation.navigate('Expense Detail', { mapLocation: selectedLocation });
   };
 
   useLayoutEffect(() => {

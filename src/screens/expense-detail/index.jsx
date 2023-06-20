@@ -7,7 +7,7 @@ import { ImageSelector, ItemDetail, LocationSelector, MapPreview } from '../../c
 import { theme } from '../../constants';
 import { addExpenseImageLocation } from '../../store/actions';
 
-const Detail = () => {
+const ExpenseDetail = () => {
   const dispatch = useDispatch();
   const [newImage, setNewImage] = useState('');
   const [newCoords, setNewCoords] = useState(null);
@@ -68,4 +68,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default ExpenseDetail;

@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { theme } from '../../constants';
-import { Detail, Home, Maps } from '../../screens';
+import { ExpenseDetail, Expenses, Home, IncomeDetail, Maps } from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +19,10 @@ const HomeNavigator = () => {
         },
       }}>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="Expense Detail" component={ExpenseDetail} />
+      <Stack.Screen name="Income Detail" component={IncomeDetail} />
       <Stack.Screen name="Maps" component={Maps} options={{ title: 'Map' }} />
+      <Stack.Screen name="Expenses" component={Expenses} />
     </Stack.Navigator>
   );
 };
