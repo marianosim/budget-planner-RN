@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { Picker } from '@react-native-picker/picker';
-import { useFocusEffect } from '@react-navigation/native';
+//import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { View, Text, FlatList, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,6 @@ import { theme } from '../../constants';
 import {
   addExpense,
   addIncome,
-  getExpenses,
   getExpensesFromDataBase,
   getIncomes,
   selectExpense,

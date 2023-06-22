@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { styles } from './styles';
 import { theme } from '../../constants';
 
-const ItemDetail = () => {
+const ExpenseItemDetail = () => {
   const categories = useSelector((state) => state.categories.data);
   const expenseItem = useSelector((state) => state.expenses.selected);
   const formatDate = (time) => {
@@ -25,7 +25,8 @@ const ItemDetail = () => {
           <Text style={styles.date}>Date: {formatDate(expenseItem.date)}</Text>
           <Text style={styles.category}>Category: {categories[indexCategory].name}</Text>
           <Text style={styles.type}>Type: {expenseItem.type}</Text>
-          <Image source={expenseItem.image} />
+          {expenseItem.image ? <Image source={{ uri: expenseItem.image }} /> : null}
+
           <Text style={styles.address}>Address: {expenseItem.address}</Text>
         </View>
       </View>
@@ -33,4 +34,4 @@ const ItemDetail = () => {
   );
 };
 
-export default ItemDetail;
+export default ExpenseItemDetail;

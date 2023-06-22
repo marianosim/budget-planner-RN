@@ -3,7 +3,7 @@ import { ScrollView, Image, Button, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
-import { ImageSelector, ItemDetail, LocationSelector, MapPreview } from '../../components';
+import { ImageSelector, ExpenseItemDetail, LocationSelector, MapPreview } from '../../components';
 import { theme } from '../../constants';
 import { addExpenseImageLocation } from '../../store/actions';
 
@@ -43,7 +43,7 @@ const ExpenseDetail = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <ItemDetail />
+      <ExpenseItemDetail />
       {item.image ? (
         <Image style={styles.image} source={{ uri: item.image }} />
       ) : (

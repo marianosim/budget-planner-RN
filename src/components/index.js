@@ -4,7 +4,7 @@ export { default as ExpenseItem } from './expense-item/index';
 export { default as InfoCards } from './info-cards/index';
 export { default as Input } from './input/index';
 export { default as Label } from './label/index';
-export { default as ItemDetail } from './item-detail/index';
+export { default as ExpenseItemDetail } from './expense-item-detail/index';
 export { default as AddExpenseIncomeButton } from './add-expense-income-button/index';
 export { default as ImageSelector } from './image-selector/index';
 export { default as LocationSelector } from './location-selector/index';
