@@ -1,6 +1,11 @@
-import { totalIncome } from './income.action';
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
-import { insertExpense, selectExpensesFromDB, updateExpense } from '../../db';
+import {
+  deleteExpenseFromDB,
+  insertExpense,
+  selectExpensesFromDB,
+  selectSingleExpenseFromDB,
+  updateExpense,
+} from '../../db';
 import { URL_GEOCODING } from '../../utils/maps';
 import { expensesTypes } from '../types';
 
@@ -11,29 +16,8 @@ const {
   ADD_EXPENSE,
   GET_EXPENSES,
   ADD_IMAGE_LOCATION,
+  DELETE_EXPENSE,
 } = expensesTypes;
-
-// export const getExpenses = () => {
-//   return async (dispatch) => {
-//     try {
-//       const dbResult = selectExpensesFromDB();
-//       return dbResult.rows._array;
-//       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`);
-//       const result = await response.json();
-
-//       const expenses = Object.keys(result).map((key) => ({
-//         ...result[key],
-//         id: key.toString(),
-//       }));
-//       dispatch({
-//         type: GET_EXPENSES,
-//         expenses,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
 
 export const getExpensesFromDataBase = () => {
   return async (dispatch) => {
@@ -43,6 +27,11 @@ export const getExpensesFromDataBase = () => {
       dispatch({
         type: GET_EXPENSES,
         expenses,
+      });
+      const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+      dispatch({
+        type: TOTAL_EXPENSES,
+        totalAmount,
       });
     } catch (error) {
       console.error(error);
@@ -70,7 +59,6 @@ export const addExpense = ({
   coords = '',
   date = Date.now(),
 }) => {
-  // const expenseData = { title, amount, category, type, image, address, coords, date };
   return async (dispatch) => {
     try {
       const dbResult = await insertExpense(
@@ -83,47 +71,17 @@ export const addExpense = ({
         coords,
         date
       );
-
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          amount,
-          category,
-          type: 'expense',
-          image: '',
-          coord: '',
-          address: '',
-          date: Date.now(),
-        }),
-        // body: JSON.stringify(expenseData),
-      });
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-      const result = await response.json();
-
-      // const expenseId = result.id;
+      const dbResponse = await selectSingleExpenseFromDB();
+      const [newExpense] = dbResponse?.rows?._array;
+      console.log('New expense: ', newExpense);
 
       dispatch({
         type: ADD_EXPENSE,
-        // expense: { id: expenseId, ...expenseData },
-        expense: result,
+        expense: newExpense,
       });
     } catch (error) {
       console.log(error);
     }
-  };
-};
-
-export const totalExpenses = (expenses) => {
-  const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
-  return {
-    type: TOTAL_EXPENSES,
-    totalAmount,
   };
 };
 
@@ -152,30 +110,52 @@ export const addExpenseImageLocation = ({
 
       const dbResult = await updateExpense(id, image, (address = newAddress), coords);
 
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}.json`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          amount,
-          category,
-          type,
-          date,
-          image,
-          address: newAddress,
-          coords,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-      const result = await response.json();
+      // const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}.json`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     title,
+      //     amount,
+      //     category,
+      //     type,
+      //     date,
+      //     image,
+      //     address: newAddress,
+      //     coords,
+      //   }),
+      // });
+      // if (!response.ok) {
+      //   throw new Error('Something went wrong!');
+      // }
+      // const result = await response.json();
 
       dispatch({
         type: ADD_IMAGE_LOCATION,
-        updatedExpense: result,
+        updatedExpense: dbResult,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const totalExpenses = (expenses) => {
+  const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+  return {
+    type: TOTAL_EXPENSES,
+    totalAmount,
+  };
+};
+
+export const deleteExpense = (id) => {
+  return async (dispatch) => {
+    try {
+      const dbResult = await deleteExpenseFromDB(id);
+      dispatch({
+        type: DELETE_EXPENSE,
+        id,
       });
     } catch (error) {
       console.error(error);

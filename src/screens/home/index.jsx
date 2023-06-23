@@ -18,13 +18,11 @@ import {
   totalExpenses,
   totalIncome,
 } from '../../store/actions';
-import { UPDATE_FORM, onInputChange } from '../../utils/form';
+import { RESET_FORM, UPDATE_FORM, onInputChange, resetForm } from '../../utils/form';
 
 const initialState = {
   title: { value: '', error: '', touched: false, hasError: true },
   amount: { value: '', error: '', touched: false, hasError: true },
-  //category: { value: '', error: '', touched: false, hasError: true },
-  // type: { value: '', error: '', touched: false, hasError: true },
   isFormValid: false,
 };
 
@@ -43,6 +41,8 @@ const formReducer = (state, action) => {
         },
         isFormValid,
       };
+    case RESET_FORM:
+      return initialState;
   }
 };
 
@@ -59,6 +59,7 @@ const Home = ({ navigation }) => {
   const activities = expenses?.concat(incomes);
   const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
   const incomesTotal = useSelector((state) => state.income.totalIncome);
+  const balanceTotal = incomesTotal - expenseTotal;
   const renderItem = ({ item }) => <ExpenseItem item={item} onSelected={onSelected} />;
   const keyExtractor = (item) => item?.id?.toString();
   const onSelected = (item) => {
@@ -115,8 +116,9 @@ const Home = ({ navigation }) => {
         category: Number(selectedCategory),
       })
     );
+    dispatchFormState(resetForm());
     setAddingExpense(false);
-    navigation.navigate('Expenses');
+    //navigation.navigate('Expenses');
   };
 
   const onAddIncome = () => {
@@ -127,13 +129,17 @@ const Home = ({ navigation }) => {
       })
     );
     setAddingIncome(false);
-    navigation.navigate('Expenses');
+    //navigation.navigate('Expenses');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.cardsContainer}>
-        <InfoCards expenseTotal={expenseTotal} incomesTotal={incomesTotal} />
+        <InfoCards
+          expenseTotal={expenseTotal}
+          incomesTotal={incomesTotal}
+          balanceTotal={balanceTotal}
+        />
       </View>
       <View style={styles.addButtonsContainer}>
         <TouchableOpacity onPress={() => setAddingExpense(true)} style={styles.touchableContainer}>

@@ -17,6 +17,12 @@ export const getIncomes = () => {
         type: GET_INCOME,
         incomes,
       });
+
+      const totalIncomeAmount = incomes.reduce((acc, income) => acc + Number(income.amount), 0);
+      dispatch({
+        type: TOTAL_INCOME,
+        totalIncomeAmount,
+      });
     } catch (error) {
       console.log(error);
     }

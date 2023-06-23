@@ -1,4 +1,5 @@
 export const UPDATE_FORM = 'UPDATE_FORM';
+export const RESET_FORM = 'RESET_FORM';
 
 const validateInput = ({ name, value }) => {
   let hasError = false;
@@ -57,4 +58,10 @@ export const onInputChange = ({ name, value, dispatch, formState }) => {
       isFormValid,
     },
   });
+};
+
+export const resetForm = () => {
+  return {
+    type: RESET_FORM,
+  };
 };

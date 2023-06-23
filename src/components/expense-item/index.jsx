@@ -1,14 +1,21 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { styles } from './styles';
 import { theme } from '../../constants';
 import { deleteExpenseFromDB } from '../../db';
+import { deleteExpense } from '../../store/actions';
 
 const ExpenseItem = ({ item, onSelected }) => {
+  const dispatch = useDispatch();
   const formatDate = (time) => {
     const date = new Date(time);
     return date.toLocaleDateString();
+  };
+
+  const onDeleteExpense = (id) => {
+    dispatch(deleteExpense(id));
   };
 
   return (
@@ -38,7 +45,7 @@ const ExpenseItem = ({ item, onSelected }) => {
                 name="trash"
                 size={25}
                 color={theme.colors.expenseRed}
-                //onPress={() => deleteExpenseFromDB(item.id)}
+                onPress={() => onDeleteExpense(item.id)}
               />
             </TouchableOpacity>
           </View>

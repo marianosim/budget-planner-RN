@@ -78,6 +78,24 @@ export const updateExpense = (id, image, address, coords) => {
   return promise;
 };
 
+export const selectSingleExpenseFromDB = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM expenses ORDER BY id DESC LIMIT 1',
+        [],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+  return promise;
+};
+
 export const deleteExpenseFromDB = (id) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {

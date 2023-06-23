@@ -7,7 +7,7 @@ import { ImageSelector, ExpenseItemDetail, LocationSelector, MapPreview } from '
 import { theme } from '../../constants';
 import { addExpenseImageLocation } from '../../store/actions';
 
-const ExpenseDetail = () => {
+const ExpenseDetail = ({ navigation }) => {
   const dispatch = useDispatch();
   const [newImage, setNewImage] = useState('');
   const [newCoords, setNewCoords] = useState(null);
@@ -37,6 +37,7 @@ const ExpenseDetail = () => {
         coords: newCoords,
       })
     );
+    navigation.navigate('Home');
   };
 
   const parseCoords = JSON.parse(item.coords);
