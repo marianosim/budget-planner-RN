@@ -6,17 +6,9 @@ export const styles = StyleSheet.create({
   container: {
     height: 90,
     marginHorizontal: 10,
+    marginVertical: 10,
     borderRadius: 5,
-    paddingVertical: 10,
-  },
-  touchableContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 5,
-    backgroundColor: theme.colors.lightGray,
-    paddingHorizontal: 10,
-    paddingVertical: 14,
+    //paddingVertical: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -26,12 +18,24 @@ export const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
   },
+  touchableContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    backgroundColor: theme.colors.lightGray,
+    paddingHorizontal: 10,
+    paddingVertical: 14,
+    // alignItems: 'center',
+  },
   name: {
     fontFamily: 'Josefin-Medium',
-    fontSize: 17,
+    fontSize: 18,
   },
   infoContainer: {
     flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   amount: {
     fontFamily: 'Josefin-Bold',
@@ -40,6 +44,7 @@ export const styles = StyleSheet.create({
   },
   date: {
     fontFamily: 'Josefin-Regular',
+    marginTop: 5,
   },
   amountBadge: {
     borderRadius: 5,
@@ -48,7 +53,7 @@ export const styles = StyleSheet.create({
     padding: 4,
   },
   deleteButton: {
-    paddingLeft: 14,
+    paddingLeft: 20,
     justifyContent: 'center',
   },
 });

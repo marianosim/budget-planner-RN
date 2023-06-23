@@ -1,21 +1,17 @@
 import { StyleSheet } from 'react-native';
 
-import { theme } from '../../constants';
-
 export const styles = StyleSheet.create({
   container: {
     width: '18%',
   },
   containerTouchable: {
     borderWidth: 5,
-    borderRadius: 30,
-    width: 60,
-    height: 60,
+    borderRadius: 40,
+    width: 80,
+    height: 80,
   },
   symbol: {
-    //fontFamily: 'Josefin-Regular',
-    fontSize: 35,
+    fontSize: 48,
     textAlign: 'center',
-    //color: theme.colors.incomeGreen,
   },
 });

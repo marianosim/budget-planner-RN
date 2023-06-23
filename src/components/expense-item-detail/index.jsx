@@ -21,7 +21,7 @@ const ExpenseItemDetail = () => {
           <Ionicons name="caret-down" size={25} color={theme.colors.expenseRed} />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.amount}>Amount: $ -{expenseItem.amount}</Text>
+          <Text style={styles.amount}>Amount: $ -{expenseItem.amount.toLocaleString('ES-AR')}</Text>
           <Text style={styles.date}>Date: {formatDate(expenseItem.date)}</Text>
           <Text style={styles.category}>Category: {categories[indexCategory].name}</Text>
           <Text style={styles.type}>Type: {expenseItem.type}</Text>

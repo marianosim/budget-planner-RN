@@ -20,7 +20,9 @@ const IncomeItemDetail = () => {
           <Ionicons name="caret-up" size={25} color={theme.colors.incomeGreen} />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.amount}>Amount: $ {incomeItem.amount}</Text>
+          <Text style={styles.amount}>
+            Amount: $ {Number(incomeItem.amount).toLocaleString('ES-AR')}
+          </Text>
           <Text style={styles.date}>Date: {formatDate(incomeItem.date)}</Text>
           <Text style={styles.type}>Type: {incomeItem.type}</Text>
         </View>

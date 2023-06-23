@@ -11,14 +11,20 @@ export const styles = StyleSheet.create({
     //flex: 1,
     //marginBottom: 5,
   },
+  add: {
+    fontFamily: 'Josefin-Bold',
+    fontSize: 22,
+    marginLeft: 14,
+  },
   addButtonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   touchableContainer: {
-    marginVertical: 15,
-    paddingHorizontal: 30,
+    marginVertical: 12,
+    paddingHorizontal: 14,
+    marginBottom: 20,
   },
   buttonTitleContainer: {
     flex: 1,
@@ -26,10 +32,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonTitle: {
-    fontFamily: 'Josefin-Bold',
-    fontSize: 16,
+    fontFamily: 'Josefin-Medium',
+    fontSize: 19,
     justifyContent: 'center',
-    paddingBottom: 5,
+    alignItems: 'center',
+    textAlign: 'center',
+    paddingBottom: 10,
   },
   inputContainer: {
     width: '80%',
@@ -49,10 +57,12 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     //marginTop: 20,
   },
-  expenseList: {},
+  expenseList: {
+    flex: 1,
+  },
   expenseListTitle: {
     fontFamily: 'Josefin-Regular',
-    fontSize: 16,
-    marginHorizontal: 12,
+    fontSize: 18,
+    marginHorizontal: 14,
   },
 });

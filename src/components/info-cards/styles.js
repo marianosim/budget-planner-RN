@@ -27,12 +27,12 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   cardTitle: {
-    fontFamily: 'Josefin-Bold',
-    fontSize: 16,
+    fontFamily: 'Josefin-Medium',
+    fontSize: 18,
     textAlign: 'center',
   },
   cardTotal: {
-    fontFamily: 'Josefin-Medium',
+    fontFamily: 'Josefin-Bold',
     fontSize: 16,
   },
 });
