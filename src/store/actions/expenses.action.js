@@ -3,6 +3,7 @@ import {
   deleteExpenseFromDB,
   insertExpense,
   selectExpensesFromDB,
+  selectLastExpenseFromDB,
   selectSingleExpenseFromDB,
   updateExpense,
 } from '../../db';
@@ -71,13 +72,24 @@ export const addExpense = ({
         coords,
         date
       );
-      const dbResponse = await selectSingleExpenseFromDB();
+      const dbResponse = await selectLastExpenseFromDB();
       const [newExpense] = dbResponse?.rows?._array;
       console.log('New expense: ', newExpense);
 
       dispatch({
         type: ADD_EXPENSE,
         expense: newExpense,
+      });
+      const dbRequest = await selectExpensesFromDB();
+      const expenses = dbRequest?.rows?._array;
+      dispatch({
+        type: GET_EXPENSES,
+        expenses,
+      });
+      const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+      dispatch({
+        type: TOTAL_EXPENSES,
+        totalAmount,
       });
     } catch (error) {
       console.log(error);
@@ -152,10 +164,23 @@ export const totalExpenses = (expenses) => {
 export const deleteExpense = (id) => {
   return async (dispatch) => {
     try {
-      const dbResult = await deleteExpenseFromDB(id);
+      const dbRequest = await selectSingleExpenseFromDB(id);
+      const [expenseToDelete] = dbRequest?.rows?._array;
       dispatch({
         type: DELETE_EXPENSE,
-        id,
+        id: expenseToDelete.id,
+      });
+      const dbResult = await deleteExpenseFromDB(id);
+      const dbRequestExpenses = await selectExpensesFromDB();
+      const expenses = dbRequestExpenses?.rows?._array;
+      dispatch({
+        type: GET_EXPENSES,
+        expenses,
+      });
+      const totalAmount = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+      dispatch({
+        type: TOTAL_EXPENSES,
+        totalAmount,
       });
     } catch (error) {
       console.error(error);

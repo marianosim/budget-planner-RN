@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { styles } from './styles';
 import { theme } from '../../constants';
 import { deleteExpenseFromDB } from '../../db';
-import { deleteExpense } from '../../store/actions';
+import { deleteExpense, deleteIncome } from '../../store/actions';
 
 const ExpenseItem = ({ item, onSelected }) => {
   const dispatch = useDispatch();
@@ -16,6 +16,10 @@ const ExpenseItem = ({ item, onSelected }) => {
 
   const onDeleteExpense = (id) => {
     dispatch(deleteExpense(id));
+  };
+
+  const onDeleteIncome = (id) => {
+    dispatch(deleteIncome(id));
   };
 
   return (
@@ -48,7 +52,9 @@ const ExpenseItem = ({ item, onSelected }) => {
                 name="trash"
                 size={25}
                 color={theme.colors.expenseRed}
-                onPress={() => onDeleteExpense(item.id)}
+                onPress={() =>
+                  item.type === 'expense' ? onDeleteExpense(item.id) : onDeleteIncome(item.id)
+                }
               />
             </TouchableOpacity>
           </View>

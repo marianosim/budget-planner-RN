@@ -1,6 +1,6 @@
 import { incomeTypes } from '../types';
 
-const { GET_INCOME, SELECT_INCOME, ADD_INCOME, TOTAL_INCOME } = incomeTypes;
+const { GET_INCOME, SELECT_INCOME, ADD_INCOME, TOTAL_INCOME, DELETE_INCOME } = incomeTypes;
 
 const initialState = {
   data: [],
@@ -30,6 +30,12 @@ const incomeReducer = (state = initialState, action) => {
         ...state,
         totalIncome: action.totalIncomeAmount,
       };
+    case DELETE_INCOME:
+      return {
+        ...state,
+        data: state.data.filter((income) => income.id !== action.id),
+      };
+
     default:
       return state;
   }

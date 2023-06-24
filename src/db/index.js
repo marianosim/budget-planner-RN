@@ -78,7 +78,7 @@ export const updateExpense = (id, image, address, coords) => {
   return promise;
 };
 
-export const selectSingleExpenseFromDB = () => {
+export const selectLastExpenseFromDB = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -96,11 +96,29 @@ export const selectSingleExpenseFromDB = () => {
   return promise;
 };
 
+export const selectSingleExpenseFromDB = (id) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM expenses WHERE id = ?',
+        [id],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+  return promise;
+};
+
 export const deleteExpenseFromDB = (id) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'DELETE from expenses WHERE id = ?',
+        'DELETE FROM expenses WHERE id = ?',
         [id],
         (_, result) => {
           resolve(result);

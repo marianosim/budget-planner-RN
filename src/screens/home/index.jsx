@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { Picker } from '@react-native-picker/picker';
-//import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import {
   View,
@@ -94,7 +94,7 @@ const Home = ({ navigation }) => {
 
   // useFocusEffect(
   //   useCallback(() => {
-  //     dispatch(getExpensesFromDataBase());
+  //     dispatch(totalExpenses(expenses));
   //   }, [dispatch])
   // );
   useEffect(() => {
