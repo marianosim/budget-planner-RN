@@ -37,10 +37,9 @@ const ExpenseItem = ({ item, onSelected }) => {
                   item?.type === 'expense' ? theme.colors.expenseRed : theme.colors.incomeGreen,
               }}>
               <Text style={styles.amount}>
-                ${' '}
                 {item?.type === 'expense'
-                  ? `-${Number(item?.amount).toLocaleString('ES-AR')}`
-                  : Number(item?.amount).toLocaleString('ES-AR')}
+                  ? `-$ ${Number(item?.amount).toLocaleString('ES-AR')}`
+                  : `$ ${Number(item?.amount).toLocaleString('ES-AR')}`}
               </Text>
             </View>
             <Text style={styles.date}>{formatDate(item?.date)}</Text>

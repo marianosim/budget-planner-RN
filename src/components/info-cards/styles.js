@@ -33,6 +33,6 @@ export const styles = StyleSheet.create({
   },
   cardTotal: {
     fontFamily: 'Josefin-Bold',
-    fontSize: 16,
+    fontSize: 17,
   },
 });

@@ -40,6 +40,7 @@ const Auth = () => {
   const title = isLogin ? 'Login' : 'Register';
   const buttonTitle = isLogin ? 'Login' : 'Register';
   const messageText = isLogin ? "Don't have an account?" : 'Already have an account?';
+  const greeting = isLogin ? 'Please log in to continue:' : 'Please register to get started:';
   const onHandleChangeAuth = () => {
     setIsLogin(!isLogin);
   };
@@ -55,6 +56,10 @@ const Auth = () => {
   };
   return (
     <View style={styles.container}>
+      <View style={styles.welcomeHeader}>
+        <Text style={styles.welcome}>Welcome!</Text>
+        <Text style={styles.greeting}>{greeting}</Text>
+      </View>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Input
@@ -92,7 +97,7 @@ const Auth = () => {
           <Button
             disabled={!formState.isFormValid}
             title={buttonTitle}
-            color={theme.colors.text}
+            color={theme.colors.primary}
             onPress={onHandleAuth}
           />
         </View>

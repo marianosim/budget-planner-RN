@@ -206,9 +206,8 @@ const Home = ({ navigation }) => {
               <Picker
                 ref={pickerRef}
                 selectedValue={selectedCategory}
-                onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}
-                showSearch>
-                <Picker.Item label="Select Category" value="0" disabled />
+                onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}>
+                <Picker.Item label="Select Category" value="0" enabled={false} />
                 <Picker.Item label="Supermarket" value="1" />
                 <Picker.Item label="Bar & Restaurants" value="2" />
                 <Picker.Item label="Transport" value="3" />

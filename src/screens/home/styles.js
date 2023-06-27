@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     width: '80%',
     maxWidth: 400,
     padding: 15,
-    margin: 10,
+    margin: 15,
     backgroundColor: theme.colors.white,
     borderColor: theme.colors.primary,
     minHeight: 300,

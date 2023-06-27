@@ -9,11 +9,26 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  welcomeHeader: {
+    marginTop: -80,
+    marginBottom: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  welcome: {
+    fontFamily: 'Josefin-Medium',
+    fontSize: 25,
+  },
+  greeting: {
+    fontFamily: 'Josefin-Regular',
+    fontSize: 16,
+    marginTop: 20,
+  },
   content: {
     width: '80%',
     maxWidth: 400,
     padding: 15,
-    margin: 15,
+    margin: 10,
     backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderColor: theme.colors.primary,
@@ -44,7 +59,7 @@ export const styles = StyleSheet.create({
   },
   linkText: {
     borderBottomColor: '#0582CA',
-    borderBottomWidth: 1,
+    //borderBottomWidth: 1,
     fontFamily: 'Josefin-Regular',
     fontSize: 14,
     color: '#0582CA',
