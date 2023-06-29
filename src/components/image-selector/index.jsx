@@ -28,8 +28,10 @@ const ImageSelector = ({ onImage }) => {
       quality: 0.7,
     });
 
-    setPickedUrl(image.uri);
-    onImage(image.uri);
+    const imageUri = image.assets[0].uri;
+
+    setPickedUrl(imageUri);
+    onImage(imageUri);
   };
 
   return (

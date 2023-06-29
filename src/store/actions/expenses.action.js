@@ -74,7 +74,6 @@ export const addExpense = ({
       );
       const dbResponse = await selectLastExpenseFromDB();
       const [newExpense] = dbResponse?.rows?._array;
-      console.log('New expense: ', newExpense);
 
       dispatch({
         type: ADD_EXPENSE,
@@ -97,17 +96,7 @@ export const addExpense = ({
   };
 };
 
-export const addExpenseImageLocation = ({
-  id,
-  title,
-  amount,
-  category,
-  type,
-  date,
-  image,
-  address,
-  coords,
-}) => {
+export const addExpenseImageLocation = ({ id, image, address, coords }) => {
   return async (dispatch) => {
     try {
       const geocodingResponse = await fetch(URL_GEOCODING(coords.lat, coords.lng));
@@ -142,10 +131,12 @@ export const addExpenseImageLocation = ({
       //   throw new Error('Something went wrong!');
       // }
       // const result = await response.json();
-
+      console.log('Expense updated: ', dbResult);
+      const dbRequestExpenses = await selectExpensesFromDB();
+      const expenses = dbRequestExpenses?.rows?._array;
       dispatch({
-        type: ADD_IMAGE_LOCATION,
-        updatedExpense: dbResult,
+        type: GET_EXPENSES,
+        expenses,
       });
     } catch (error) {
       console.error(error);
