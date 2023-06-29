@@ -1,14 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { theme } from '../../constants';
-import { ExpenseDetail, Expenses, Maps } from '../../screens';
+import { IncomeDetail, Incomes } from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
-const ExpensesNavigator = () => {
+const IncomesNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Expenses"
+      initialRouteName="Incomes"
       screenOptions={{
         headerStyle: {
           backgroundColor: theme.colors.secondary,
@@ -18,11 +18,10 @@ const ExpensesNavigator = () => {
           fontFamily: 'Josefin-Bold',
         },
       }}>
-      <Stack.Screen name="Expenses" component={Expenses} />
-      <Stack.Screen name="Expense Detail" component={ExpenseDetail} />
-      <Stack.Screen name="Maps" component={Maps} options={{ title: 'Map' }} />
+      <Stack.Screen name="Incomes" component={Incomes} />
+      <Stack.Screen name="Income Detail" component={IncomeDetail} />
     </Stack.Navigator>
   );
 };
 
-export default ExpensesNavigator;
+export default IncomesNavigator;

@@ -5,6 +5,7 @@ import { theme } from '../../constants';
 import CategoriesNavigator from '../categories';
 import ExpensesNavigator from '../expenses';
 import HomeNavigator from '../home';
+import IncomesNavigator from '../incomes';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -20,6 +21,9 @@ const TabsNavigator = () => {
         },
         tabBarStyle: {
           backgroundColor: theme.colors.secondary,
+          height: 60,
+          paddingBottom: 5,
+          paddingTop: 5,
         },
         tabBarActiveTintColor: theme.colors.black,
         tabBarInactiveTintColor: theme.colors.darkGray,
@@ -52,6 +56,16 @@ const TabsNavigator = () => {
         component={ExpensesNavigator}
         options={{
           tabBarLabel: 'Expenses',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'wallet' : 'wallet-outline'} size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="IncomesTab"
+        component={IncomesNavigator}
+        options={{
+          tabBarLabel: 'Incomes',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'cash' : 'cash-outline'} size={size} color={color} />
           ),

@@ -11,7 +11,7 @@ const CategoriesNavigator = () => {
       initialRouteName="Categories"
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.terciary,
+          backgroundColor: theme.colors.secondary,
         },
         headerTintColor: theme.colors.text,
         headerTitleStyle: {

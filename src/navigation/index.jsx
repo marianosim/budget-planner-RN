@@ -7,7 +7,10 @@ import TabsNavigator from './tabs';
 const AppNavigator = () => {
   const userId = useSelector((state) => state.auth.userId);
   return (
-    <NavigationContainer>{userId ? <TabsNavigator /> : <AuthNavigator />}</NavigationContainer>
+    // <NavigationContainer>{userId ? <TabsNavigator /> : <AuthNavigator />}</NavigationContainer>
+    <NavigationContainer>
+      <TabsNavigator />
+    </NavigationContainer>
   );
 };
 

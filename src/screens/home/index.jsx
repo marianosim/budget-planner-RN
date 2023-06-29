@@ -92,25 +92,12 @@ const Home = ({ navigation }) => {
     pickerRef.current.blur();
   };
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     dispatch(totalExpenses(expenses));
-  //   }, [dispatch])
-  // );
   useEffect(() => {
     dispatch(getExpensesFromDataBase());
     dispatch(getIncomes());
     dispatch(totalIncome(incomes));
     dispatch(totalExpenses(expenses));
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(totalIncome(incomes));
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(totalExpenses(expenses));
-  // }, [dispatch]);
 
   const onHandleInputChange = ({ value, name }) => {
     onInputChange({ name, value, dispatch: dispatchFormState, formState });

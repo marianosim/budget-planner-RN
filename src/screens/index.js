@@ -6,3 +6,4 @@ export { default as ExpenseDetail } from './expense-detail/index';
 export { default as Maps } from './maps/index';
 export { default as IncomeDetail } from './income-detail/index';
 export { default as Auth } from './auth/index';
+export { default as Incomes } from './incomes/index';
