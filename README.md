@@ -7,7 +7,7 @@ Simple app for Android developed with React Native to keep track of your expense
 ## INSTALLATION
 ### 1.Clone the repository:
 ```bash
-git clone [https://github.com/marianosim/KitchenWarehouse-Simantob.git](https://github.com/marianosim/expense-tracker-RN.git)
+git clone https://github.com/marianosim/KitchenWarehouse-Simantob.git
 ```
 ### 2.Install the necessary dependencies:
 ```bash
