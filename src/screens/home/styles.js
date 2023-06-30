@@ -7,10 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.white,
   },
-  cardsContainer: {
-    //flex: 1,
-    //marginBottom: 5,
-  },
+  cardsContainer: {},
   add: {
     fontFamily: 'Josefin-Bold',
     fontSize: 22,

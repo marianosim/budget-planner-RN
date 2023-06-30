@@ -7,7 +7,6 @@ const {
   TOTAL_EXPENSES,
   ADD_EXPENSE,
   GET_EXPENSES,
-  ADD_IMAGE_LOCATION,
   DELETE_EXPENSE,
 } = expensesTypes;
 
@@ -44,12 +43,6 @@ const expensesReducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...state.data, action.expense],
-      };
-    case ADD_IMAGE_LOCATION:
-      // const expenseToUpdate = state.data.find((expense) => expense.id === action.updatedExpense.id);
-      return {
-        ...state,
-        data: [...state.data, action.updatedExpense],
       };
     case DELETE_EXPENSE:
       return {

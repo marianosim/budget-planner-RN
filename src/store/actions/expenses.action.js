@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
 import {
   deleteExpenseFromDB,
@@ -16,7 +17,6 @@ const {
   TOTAL_EXPENSES,
   ADD_EXPENSE,
   GET_EXPENSES,
-  ADD_IMAGE_LOCATION,
   DELETE_EXPENSE,
 } = expensesTypes;
 
@@ -110,28 +110,6 @@ export const addExpenseImageLocation = ({ id, image, address, coords }) => {
       const newAddress = geocodingData.results[0].formatted_address;
 
       const dbResult = await updateExpense(id, image, (address = newAddress), coords);
-
-      // const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/expenses/${id}.json`, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     title,
-      //     amount,
-      //     category,
-      //     type,
-      //     date,
-      //     image,
-      //     address: newAddress,
-      //     coords,
-      //   }),
-      // });
-      // if (!response.ok) {
-      //   throw new Error('Something went wrong!');
-      // }
-      // const result = await response.json();
-      console.log('Expense updated: ', dbResult);
       const dbRequestExpenses = await selectExpensesFromDB();
       const expenses = dbRequestExpenses?.rows?._array;
       dispatch({

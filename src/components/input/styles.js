@@ -13,11 +13,8 @@ export const styles = StyleSheet.create({
     width: '90%',
     fontFamily: 'Josefin-Regular',
     color: theme.colors.text,
-    //paddingVertical: 5,
-    //marginBottom: 5,
   },
   errorContainer: {
-    //flex: 0.5,
     paddingVertical: 5,
     marginTop: 5,
   },

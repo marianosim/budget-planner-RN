@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FIREBASE_REALTIME_DB_URL } from '../../constants';
 import { incomeTypes } from '../types';
 

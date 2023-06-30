@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 5,
-    //paddingVertical: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -26,7 +25,6 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.lightGray,
     paddingHorizontal: 10,
     paddingVertical: 14,
-    // alignItems: 'center',
   },
   name: {
     fontFamily: 'Josefin-Medium',
@@ -34,8 +32,6 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   amount: {
     fontFamily: 'Josefin-Bold',

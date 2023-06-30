@@ -35,10 +35,7 @@ const Incomes = ({ navigation }) => {
   const keyExtractor = (item) => item?.id?.toString();
   const onSelected = (item) => {
     dispatch(selectExpense(item.id));
-    navigation.navigate('Income Detail', {
-      //expenseId: item.id,
-      //color: item.color,
-    });
+    navigation.navigate('Income Detail', {});
   };
 
   return (

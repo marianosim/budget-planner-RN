@@ -12,7 +12,7 @@ const ExpenseDetail = ({ navigation }) => {
   const [newImage, setNewImage] = useState('');
   const [newCoords, setNewCoords] = useState(null);
   const item = useSelector((state) => state.expenses.selected);
-  const { id, title, amount, category, type, date, image, address, coords } = item;
+  const { id, title, amount, category, type, date } = item;
 
   const enableButton = newImage && newCoords;
 

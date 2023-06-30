@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     height: 100,
     backgroundColor: theme.colors.primary,
-    //marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },

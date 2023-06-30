@@ -1,11 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { styles } from './styles';
 import { theme } from '../../constants';
-import { deleteExpenseFromDB } from '../../db';
 import { deleteExpense, deleteIncome } from '../../store/actions';
 import ModalItem from '../modal';
 
@@ -24,13 +22,6 @@ const ExpenseItem = ({
     return date.toLocaleDateString();
   };
 
-  // const onDeleteExpense = (id) => {
-  //   dispatch(deleteExpense(id));
-  // };
-
-  // const onDeleteIncome = (id) => {
-  //   dispatch(deleteIncome(id));
-  // };
   const onHandlerDeleteItem = (id) => {
     if (selectedItem.type === 'expense') {
       dispatch(deleteExpense(id));
@@ -70,10 +61,7 @@ const ExpenseItem = ({
                 name="trash"
                 size={25}
                 color={theme.colors.expenseRed}
-                onPress={
-                  () => onHandlerModal(item.id)
-                  // item.type === 'expense' ? onDeleteExpense(item.id) : onDeleteIncome(item.id)
-                }
+                onPress={() => onHandlerModal(item.id)}
               />
             </TouchableOpacity>
           </View>

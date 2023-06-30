@@ -1,7 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { Picker } from '@react-native-picker/picker';
-import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -15,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
-import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input, ModalItem } from '../../components';
+import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input } from '../../components';
 import { theme } from '../../constants';
 import {
   addExpense,
@@ -61,7 +60,6 @@ const Home = ({ navigation }) => {
   const [addingIncome, setAddingIncome] = useState(false);
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
   const [selectedCategory, setSelectedCategory] = useState();
-  const categories = useSelector((state) => state.categories.data);
   const pickerRef = useRef();
   const expenses = useSelector((state) => state.expenses.data);
   const incomes = useSelector((state) => state.income.data);
@@ -126,7 +124,6 @@ const Home = ({ navigation }) => {
     );
     dispatchFormState(resetForm());
     setAddingExpense(false);
-    //navigation.navigate('Expenses');
   };
 
   const onAddIncome = () => {
@@ -138,7 +135,6 @@ const Home = ({ navigation }) => {
     );
     dispatchFormState(resetForm());
     setAddingIncome(false);
-    //navigation.navigate('Expenses');
   };
   const onHandlerModal = (id) => {
     setModalVisible(!modalVisible);

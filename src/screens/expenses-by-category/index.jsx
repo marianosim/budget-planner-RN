@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
 import { ExpenseItem } from '../../components';
-//import { EXPENSES } from '../../constants';
 import { filterExpenses, selectExpense } from '../../store/actions';
 
 const ExpensesByCategory = ({ navigation }) => {
@@ -17,8 +16,6 @@ const ExpensesByCategory = ({ navigation }) => {
   useEffect(() => {
     dispatch(filterExpenses(category.id));
   }, []);
-
-  // const filteredExpenses = EXPENSES.filter((expense) => expense.category === category.id);
 
   const renderItem = ({ item }) => (
     <ExpenseItem

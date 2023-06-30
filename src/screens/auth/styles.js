@@ -59,7 +59,6 @@ export const styles = StyleSheet.create({
   },
   linkText: {
     borderBottomColor: '#0582CA',
-    //borderBottomWidth: 1,
     fontFamily: 'Josefin-Regular',
     fontSize: 14,
     color: '#0582CA',
