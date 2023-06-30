@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 
@@ -6,20 +7,38 @@ import { styles } from './styles';
 import { theme } from '../../constants';
 import { deleteExpenseFromDB } from '../../db';
 import { deleteExpense, deleteIncome } from '../../store/actions';
+import ModalItem from '../modal';
 
-const ExpenseItem = ({ item, onSelected }) => {
+const ExpenseItem = ({
+  item,
+  onSelected,
+  modalVisible,
+  setModalVisible,
+  onHandlerCancelModal,
+  onHandlerModal,
+  selectedItem,
+}) => {
   const dispatch = useDispatch();
   const formatDate = (time) => {
     const date = new Date(time);
     return date.toLocaleDateString();
   };
 
-  const onDeleteExpense = (id) => {
-    dispatch(deleteExpense(id));
-  };
+  // const onDeleteExpense = (id) => {
+  //   dispatch(deleteExpense(id));
+  // };
 
-  const onDeleteIncome = (id) => {
-    dispatch(deleteIncome(id));
+  // const onDeleteIncome = (id) => {
+  //   dispatch(deleteIncome(id));
+  // };
+  const onHandlerDeleteItem = (id) => {
+    if (selectedItem.type === 'expense') {
+      dispatch(deleteExpense(id));
+      setModalVisible(!modalVisible);
+    } else {
+      dispatch(deleteIncome(id));
+      setModalVisible(!modalVisible);
+    }
   };
 
   return (
@@ -51,14 +70,24 @@ const ExpenseItem = ({ item, onSelected }) => {
                 name="trash"
                 size={25}
                 color={theme.colors.expenseRed}
-                onPress={() =>
-                  item.type === 'expense' ? onDeleteExpense(item.id) : onDeleteIncome(item.id)
+                onPress={
+                  () => onHandlerModal(item.id)
+                  // item.type === 'expense' ? onDeleteExpense(item.id) : onDeleteIncome(item.id)
                 }
               />
             </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
+      <ModalItem
+        visible={modalVisible}
+        animationType="slide"
+        item={selectedItem}
+        onHandlerCancelModal={onHandlerCancelModal}
+        onHandlerDeleteItem={onHandlerDeleteItem}
+        cancelButtonTitle="Cancel"
+        deleteButtonTitle="Delete"
+      />
     </View>
   );
 };

@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from './styles';
-import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input } from '../../components';
+import { AddExpenseIncomeButton, ExpenseItem, InfoCards, Input, ModalItem } from '../../components';
 import { theme } from '../../constants';
 import {
   addExpense,
@@ -68,7 +68,19 @@ const Home = ({ navigation }) => {
   const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
   const incomesTotal = useSelector((state) => state.income.totalIncome);
   const balanceTotal = incomesTotal - expenseTotal;
-  const renderItem = ({ item }) => <ExpenseItem item={item} onSelected={onSelected} />;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const renderItem = ({ item }) => (
+    <ExpenseItem
+      item={item}
+      selectedItem={selectedItem}
+      onSelected={onSelected}
+      onHandlerModal={onHandlerModal}
+      onHandlerCancelModal={onHandlerCancelModal}
+      modalVisible={modalVisible}
+      setModalVisible={setModalVisible}
+    />
+  );
   const keyExtractor = (item) => item?.id?.toString();
   const onSelected = (item) => {
     if (item.type === 'expense') {
@@ -123,8 +135,19 @@ const Home = ({ navigation }) => {
         amount: formState.amount.value,
       })
     );
+    dispatchFormState(resetForm());
     setAddingIncome(false);
     //navigation.navigate('Expenses');
+  };
+  const onHandlerModal = (id) => {
+    setModalVisible(!modalVisible);
+    const selection = activities.find((item) => item.id === id);
+    setSelectedItem(selection);
+  };
+
+  const onHandlerCancelModal = () => {
+    setModalVisible(!modalVisible);
+    setSelectedItem(null);
   };
 
   return (
@@ -167,7 +190,7 @@ const Home = ({ navigation }) => {
       {addingExpense ? (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <View style={styles.inputContainer}>
-            <Text style={{ fontFamily: 'Josefin-Regular', fontSize: 16 }}>Expense:</Text>
+            <Text style={{ fontFamily: 'Josefin-Medium', fontSize: 16 }}>Expense:</Text>
             <Input
               placeholder="Add your expense"
               placeholderTextColor={theme.colors.darkGray}
@@ -179,7 +202,7 @@ const Home = ({ navigation }) => {
               touched={formState.title.touched}
             />
             <Input
-              placeholder=""
+              placeholder="Add amount in numbers"
               placeholderTextColor={theme.colors.darkGray}
               onChangeText={(text) => onHandleInputChange({ value: text, name: 'amount' })}
               value={formState.amount.value}
@@ -218,7 +241,7 @@ const Home = ({ navigation }) => {
       {addingIncome ? (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <View style={styles.inputContainer}>
-            <Text style={{ fontFamily: 'Josefin-Regular', fontSize: 16 }}>Income:</Text>
+            <Text style={{ fontFamily: 'Josefin-Medium', fontSize: 16 }}>Income:</Text>
             <Input
               placeholder="Add your income"
               placeholderTextColor={theme.colors.darkGray}
@@ -230,7 +253,7 @@ const Home = ({ navigation }) => {
               touched={formState.title.touched}
             />
             <Input
-              placeholder="Add your amount in numbers"
+              placeholder="Add amount in numbers"
               placeholderTextColor={theme.colors.darkGray}
               onChangeText={(text) => onHandleInputChange({ value: text, name: 'amount' })}
               value={formState.amount.value}

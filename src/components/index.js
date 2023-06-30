@@ -10,3 +10,4 @@ export { default as ImageSelector } from './image-selector/index';
 export { default as LocationSelector } from './location-selector/index';
 export { default as MapPreview } from './map-preview/index';
 export { default as IncomeItemDetail } from './income-item-detail/index';
+export { default as ModalItem } from './modal/index';
