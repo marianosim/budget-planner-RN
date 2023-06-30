@@ -30,6 +30,9 @@ const TabsNavigator = () => {
         tabBarIconStyle: {
           fontSize: 22,
         },
+        keyboardAvoidingViewEnabled: true,
+        keyboardDismissMode: 'on-drag',
+        tabBarHideOnKeyboard: true,
       }}>
       <BottomTab.Screen
         name="HomeTab"

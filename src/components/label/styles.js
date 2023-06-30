@@ -5,7 +5,7 @@ import { theme } from '../../constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minHeight: 35,
+    minHeight: 40,
   },
   label: {
     fontFamily: 'Josefin-Regular',

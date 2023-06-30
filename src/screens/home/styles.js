@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     margin: 15,
     backgroundColor: theme.colors.white,
     borderColor: theme.colors.primary,
-    minHeight: 300,
+    minHeight: 350,
   },
 
   buttonContainer: {
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 20,
-    //marginTop: 20,
+    marginTop: 20,
   },
   expenseList: {
     flex: 1,
@@ -64,5 +64,14 @@ export const styles = StyleSheet.create({
     fontFamily: 'Josefin-Regular',
     fontSize: 18,
     marginHorizontal: 14,
+  },
+  noActivityContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  noActivityMessage: {
+    textAlign: 'center',
+    fontFamily: 'Josefin-Medium',
+    fontSize: 18,
   },
 });

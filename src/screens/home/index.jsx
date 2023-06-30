@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -64,7 +65,7 @@ const Home = ({ navigation }) => {
   const pickerRef = useRef();
   const expenses = useSelector((state) => state.expenses.data);
   const incomes = useSelector((state) => state.income.data);
-  const activities = expenses?.concat(incomes);
+  const activities = expenses || incomes ? expenses?.concat(incomes) : [];
   const expenseTotal = useSelector((state) => state.expenses.totalExpenses);
   const incomesTotal = useSelector((state) => state.income.totalIncome);
   const balanceTotal = incomesTotal - expenseTotal;
@@ -189,7 +190,7 @@ const Home = ({ navigation }) => {
       )}
       {addingExpense ? (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <View style={styles.inputContainer}>
+          <ScrollView style={styles.inputContainer}>
             <Text style={{ fontFamily: 'Josefin-Medium', fontSize: 16 }}>Expense:</Text>
             <Input
               placeholder="Add your expense"
@@ -234,7 +235,7 @@ const Home = ({ navigation }) => {
                 color={theme.colors.expenseRed}
               />
             </View>
-          </View>
+          </ScrollView>
         </KeyboardAvoidingView>
       ) : null}
 
@@ -275,18 +276,24 @@ const Home = ({ navigation }) => {
         </KeyboardAvoidingView>
       ) : null}
 
-      <View style={styles.expenseList}>
-        <FlatList
-          ListHeaderComponent={
-            <>
-              <Text style={styles.expenseListTitle}>Your latest activity:</Text>
-            </>
-          }
-          data={activities?.sort((a, b) => b.date - a.date)}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-        />
-      </View>
+      {activities.length !== 0 ? (
+        <View style={styles.expenseList}>
+          <FlatList
+            ListHeaderComponent={
+              <>
+                <Text style={styles.expenseListTitle}>Your latest activity:</Text>
+              </>
+            }
+            data={activities?.sort((a, b) => b.date - a.date)}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+          />
+        </View>
+      ) : (
+        <View style={styles.noActivityContainer}>
+          <Text style={styles.noActivityMessage}>You have no activity yet</Text>
+        </View>
+      )}
     </View>
   );
 };

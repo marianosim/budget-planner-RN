@@ -14,10 +14,12 @@ export const styles = StyleSheet.create({
     fontFamily: 'Josefin-Regular',
     color: theme.colors.text,
     //paddingVertical: 5,
+    //marginBottom: 5,
   },
   errorContainer: {
-    flex: 1,
+    //flex: 0.5,
     paddingVertical: 5,
+    marginTop: 5,
   },
   errorMessage: {
     fontSize: 12,
